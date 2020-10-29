@@ -45,7 +45,7 @@
                                                 <div class="card" style="box-shadow:none;">
                                                     <div class="card-content">
                                                         <div class="card-body">
-                                                            <form class="form form-vertical" action=" {{ route('post.create.matterial') }}" method="POST" id="createMenu">
+                                                            <form class="form form-vertical" action=" {{ route('post.create.goodDeliveryNote') }}" method="POST" id="createMenu">
                                                                 @csrf
                                                                 <div class="form-body">
                                                                     <div class="row">
@@ -61,7 +61,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="email-id-vertical">Nhà cung cấp</label>
                                                                                 <fieldset class="form-group">
-                                                                                    <select class="choices form-select">
+                                                                                    <select class="choices form-select" name="supplier_id">
                                                                                         @if(isset($supplier))
                                                                                             @foreach($supplier as $element)
                                                                                                 <option value="{{$element->id}}">{{$element->name}}</option>
@@ -73,9 +73,17 @@
                                                                         </div>
                                                                         <div class="col-12">
                                                                             <div class="form-group">
-                                                                                <label for="email-id-vertical">Đơn vị tính</label>
-                                                                                <input type="text" id="unit" class="form-control" name="unit"
-                                                                                    placeholder="Tên nhà cung cấp">
+                                                                                <label for="email-id-vertical">Tên người giao hàng</label>
+                                                                                <input type="text" class="form-control" name="deliver"
+                                                                                    placeholder="Tên người giao hàng">
+                                                                                    <label for="text" class="error"></label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="email-id-vertical">SĐT người giao hàng</label>
+                                                                                <input type="number" class="form-control" name="deliver_phone_number"
+                                                                                    placeholder="SĐT người giao hàng">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
                                                                         </div>
@@ -102,27 +110,37 @@
                 </div>
             </div>
         </div>
-        @if(isset($matterial))
+        @if(isset($goodDeliveryNote))
         <div class="card">
             <div class="card-body">
                 <table class='table table-striped' id="table1">
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Matterials code</th>
-                            <th>Tên hàng hóa</th>
-                            <th>Đơn vị tính</th>
+                            <th>Mã phiếu nhập kho</th>
+                            <th>Người lập phiếu</th>
+                            <th>Nhà cung cấp</th>
+                            <th>Tên người giao hàng</th>
+                            <th>SĐT người giao hàng</th>
+                            <th>Thời gian lập phiếu</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($matterial as $k => $value)
+                        @foreach($goodDeliveryNote as $k => $value)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td>{{$value->matterials_code}}</td>
+                                <td>{{$value->goods_delivery_note_code}}</td>
+                                <td>{{$value->staffIsName}}</td>
                                 <td>{{$value->name}}</td>
-                                <td>{{$value->unit}}</td>
+                                <td>{{$value->deliver}}</td>
+                                <td>{{$value->deliver_phone_number}}</td>
+                                <td>{{$value->issue_date}}</td>
                                 <td class="active">
+                                    <a href="{{ route('get.goodDeliveryNoteDetail', $value->id) }}" class='sidebar-link'>
+                                        <i data-feather="delete" width="20"></i> 
+                                        <span>Xem chi tiết</span>
+                                    </a>
                                     <div class="card" style="box-shadow:none; background-color:unset; margin-bottom: 0;">
                                         <div class="card-content">
                                             <div class="card-body" style="padding: 0;">
@@ -145,29 +163,45 @@
                                                                             <div class="card" style="box-shadow:none;">
                                                                                 <div class="card-content">
                                                                                     <div class="card-body">
-                                                                                        <form class="form form-vertical" action="{{ route('post.update.matterial', $value->id) }}" method="POST">
+                                                                                        <form class="form form-vertical" action="{{ route('post.update.goodDeliveryNote', $value->id) }}" method="POST">
                                                                                             @csrf
                                                                                             <div class="form-body">
                                                                                                 <div class="row">
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
                                                                                                             <label for="first-name-vertical">Mã nhà hàng hóa</label>
-                                                                                                            <input style="pointer-events:none;" type="text" class="form-control" name="matterials_code" value="{{$value->matterials_code}}" placeholder="Mã nhà cung cấp" >
+                                                                                                            <input style="pointer-events:none;" type="text" class="form-control" name="goods_delivery_note_code" value="{{$value->goods_delivery_note_code}}" placeholder="Mã nhà cung cấp" >
                                                                                                             <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
-                                                                                                            <label for="email-id-vertical">Tên tên hàng hóa</label>
-                                                                                                            <input type="text" id="number" class="form-control" name="name" value="{{$value->name}}" placeholder="Số bàn">
-                                                                                                            <label for="text" class="error"></label>
+                                                                                                            <label for="email-id-vertical">Nhà cung cấp</label>
+                                                                                                            <fieldset class="form-group">
+                                                                                                                <select class="choices form-select" name="supplier_id">
+                                                                                                                    @if(isset($supplier))
+                                                                                                                        @foreach($supplier as $element)
+                                                                                                                            <option value="{{$element->id}}"{{$element->id == $value->supplier_id ? "selected='seleted'" : "" }}>{{$element->name}}</option>
+                                                                                                                        @endforeach
+                                                                                                                    @endif
+                                                                                                                </select>
+                                                                                                            </fieldset>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
-                                                                                                            <label for="email-id-vertical">Đơn vị tính</label>
-                                                                                                            <input type="text" id="unit" class="form-control" name="unit" value="{{$value->unit}}" placeholder="Số bàn">
-                                                                                                            <label for="text" class="error"></label>
+                                                                                                            <label for="email-id-vertical">Tên người giao hàng</label>
+                                                                                                            <input type="text" class="form-control" value="{{$value->deliver}}" name="deliver"
+                                                                                                                placeholder="Tên người giao hàng">
+                                                                                                                <label for="text" class="error"></label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="email-id-vertical">SĐT người giao hàng</label>
+                                                                                                            <input type="number" class="form-control" value="{{$value->deliver_phone_number}}" name="deliver_phone_number"
+                                                                                                                placeholder="SĐT người giao hàng">
+                                                                                                                <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -193,8 +227,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{ route('get.delete.matterial', $value->id) }}" class='sidebar-link'>
-                                        <i data-feather="delete" width="20"></i> 
+                                    <a href="{{ route('get.delete.goodDeliveryNote', $value->id) }}" class='sidebar-link'>
+                                        <i data-feather="trash" width="20"></i> 
                                         <span>Xóa</span>
                                     </a>
                                 </td>

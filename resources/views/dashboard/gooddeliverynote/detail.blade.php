@@ -1,16 +1,18 @@
 @extends('layouts.app_master_dashboard')
 @section('content')
+@if(isset($goodDeliveryNoteDetail))
+{{-- {{dd($goodDeliveryNoteDetail)}} --}}
 <div class="main-content container-fluid">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Quản lý hàng hóa</h3>
+                <h3>Chi tiết phiếu nhập kho: {{$goodDeliveryNoteDetail[0]['goods_delivery_note_code']}}</h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Quản lý hàng hóa</li>
+                        <li class="breadcrumb-item active" aria-current="page">Quản lý hàng hóa nhập kho</li>
                     </ol>
                 </nav>
             </div>
@@ -33,7 +35,7 @@
                             role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle">Thêm mới hàng hóa</h5>
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Thêm mới hàng hóa nhập kho</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <i data-feather="x"></i>
                                     </button>
@@ -45,31 +47,37 @@
                                                 <div class="card" style="box-shadow:none;">
                                                     <div class="card-content">
                                                         <div class="card-body">
-                                                            <form class="form form-vertical" action=" {{ route('post.create.matterial') }}" method="POST" id="createMenu">
+                                                            <form class="form form-vertical" action=" {{ route('post.create.goodDeliveryNoteDetail', $goodDeliveryNoteDetail[0]['required_import_goods_id']) }}" method="POST" id="createMenu">
                                                                 @csrf
                                                                 <div class="form-body">
                                                                     <div class="row">
                                                                         <div class="col-12">
                                                                             <div class="form-group">
-                                                                                <label for="first-name-vertical">Mã hàng hóa</label>
-                                                                                <input type="text" class="form-control" name="matterials_code"
+                                                                                <label for="first-name-vertical">Mã phiếu</label>
+                                                                                <input type="text" style="pointer-events:none;" class="form-control" value="{{$goodDeliveryNoteDetail[0]['goods_delivery_note_code']}}" name="goods_delivery_note_code"
                                                                                     placeholder="Mã nhà cung cấp">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-12">
                                                                             <div class="form-group">
-                                                                                <label for="email-id-vertical">Tên hàng hóa</label>
-                                                                                <input type="text" id="number" class="form-control" name="name"
-                                                                                    placeholder="Tên nhà cung cấp">
-                                                                                    <label for="text" class="error"></label>
+                                                                                <label for="email-id-vertical">Hàng hóa</label>
+                                                                                <fieldset class="form-group">
+                                                                                    <select class="choices form-select" name="matterials_id">
+                                                                                        @if(isset($matterial))
+                                                                                            @foreach($matterial as $element)
+                                                                                                <option value="{{$element->id}}">{{$element->name}}</option>
+                                                                                            @endforeach
+                                                                                        @endif
+                                                                                    </select>
+                                                                                </fieldset>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-12">
                                                                             <div class="form-group">
-                                                                                <label for="email-id-vertical">Đơn vị tính</label>
-                                                                                <input type="text" id="unit" class="form-control" name="unit"
-                                                                                    placeholder="Tên nhà cung cấp">
+                                                                                <label for="email-id-vertical">Số lượng</label>
+                                                                                <input type="number" class="form-control" name="amount"
+                                                                                    placeholder="Số lượng">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
                                                                         </div>
@@ -96,26 +104,27 @@
                 </div>
             </div>
         </div>
-        @if(isset($matterial))
         <div class="card">
             <div class="card-body">
                 <table class='table table-striped' id="table1">
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Matterials code</th>
+                            <th>Mã phiếu nhập kho</th>
+                            <th>Nhà cung cấp</th>
                             <th>Tên hàng hóa</th>
-                            <th>Đơn vị tính</th>
+                            <th>Số lượng</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($matterial as $k => $value)
+                        @foreach($goodDeliveryNoteDetail as $k => $value)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td>{{$value->matterials_code}}</td>
+                                <td>{{$value->goods_delivery_note_code}}</td>
+                                <td>{{$value->staffIsName}}</td>
                                 <td>{{$value->name}}</td>
-                                <td>{{$value->unit}}</td>
+                                <td>{{$value->deliver}}</td>
                                 <td class="active">
                                     <div class="card" style="box-shadow:none; background-color:unset; margin-bottom: 0;">
                                         <div class="card-content">
@@ -139,7 +148,7 @@
                                                                             <div class="card" style="box-shadow:none;">
                                                                                 <div class="card-content">
                                                                                     <div class="card-body">
-                                                                                        <form class="form form-vertical" action="{{ route('post.update.matterial', $value->id) }}" method="POST">
+                                                                                        <form class="form form-vertical" action="" method="POST">
                                                                                             @csrf
                                                                                             <div class="form-body">
                                                                                                 <div class="row">
@@ -187,7 +196,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{ route('get.delete.matterial', $value->id) }}" class='sidebar-link'>
+                                    <a href="" class='sidebar-link'>
                                         <i data-feather="trash" width="20"></i> 
                                         <span>Xóa</span>
                                     </a>
@@ -198,7 +207,7 @@
                 </table>
             </div>
         </div>
-        @endif
     </section>
 </div>
+@endif
 @stop
