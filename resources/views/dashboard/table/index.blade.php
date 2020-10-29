@@ -208,7 +208,7 @@
                                         </div>
                                     </div>
                                     <a href="{{ route('get.delete.table', $tb->id) }}" class='sidebar-link'>
-                                        <i data-feather="delete" width="20"></i> 
+                                        <i data-feather="trash" width="20"></i> 
                                         <span>Xóa</span>
                                     </a>
                                 </td>

@@ -46,7 +46,12 @@ Route::group(['prefix' => '', 'namespace' => 'Dashboard'], function() {
 		Route::post('update-matterial-{idMatterial}', 'ManageMatterialController@updateMatterial')->name('post.update.matterial');
 		Route::get('delete-matterial-{idMatterial}', 'ManageMatterialController@deleteMatterial')->name('get.delete.matterial');
 
-		Route::get('good-delivery-note', 'GoodDeliveryNoteController@getGoodDeliveryNote')->name('get.getGoodDeliveryNote');
+		Route::get('good-delivery-note', 'GoodDeliveryNoteController@getGoodDeliveryNote')->name('get.goodDeliveryNote');
+		Route::post('create-good-delivery-note', 'GoodDeliveryNoteController@createGoodDeliveryNote')->name('post.create.goodDeliveryNote');
+		Route::post('update-good-delivery-note-{goodDeliveryNoteId}', 'GoodDeliveryNoteController@updateGoodDeliveryNote')->name('post.update.goodDeliveryNote');
+		Route::get('delete-good-delivery-note-{goodDeliveryNoteId}', 'GoodDeliveryNoteController@deleteGoodDeliveryNote')->name('get.delete.goodDeliveryNote');
+		Route::get('good-delivery-note-detail-{goodDeliveryNoteId}', 'GoodDeliveryNoteController@getDetail')->name('get.goodDeliveryNoteDetail');
+		Route::post('create-good-delivery-note-detail-{requiredImportGoodsId}', 'GoodDeliveryNoteController@createDetail')->name('post.create.goodDeliveryNoteDetail');
 
 		Route::get('lap-hoa-don-ban-hang', 'SalesManagerController@getBillOfSale')->name('get.billofsale');
 	});

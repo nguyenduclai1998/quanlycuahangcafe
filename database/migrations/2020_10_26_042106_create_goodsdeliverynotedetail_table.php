@@ -16,8 +16,8 @@ class CreateGoodsdeliverynotedetailTable extends Migration
         Schema::create('goodsdeliverynotedetail', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('matterials_id')->unsigned();
-            $table->bigInteger('required_import_goods_id');
-            $table->bigInteger('amount');
+            $table->bigInteger('required_import_goods_id')->nullable();
+            $table->bigInteger('amount')->nullable();
             $table->timestamps();
         });
     }

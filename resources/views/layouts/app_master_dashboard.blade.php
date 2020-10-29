@@ -62,7 +62,7 @@
                                 <ul class="submenu ">
                                     
                                     <li>
-                                        <a href="{{ route('get.getGoodDeliveryNote') }}">Quản lý phiếu nhập kho</a>
+                                        <a href="{{ route('get.goodDeliveryNote') }}">Quản lý phiếu nhập kho</a>
                                     </li>
                                     
                                     <li>
