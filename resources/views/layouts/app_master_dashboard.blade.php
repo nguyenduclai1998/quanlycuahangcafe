@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="{{asset('dashboard/assets/css/app.css')}}">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Include Choices CSS -->
-        <link rel="stylesheet" href="{{asset('dashboard/assets/vendors/choices.js/choices.min.css') }}" />
+        {{-- <link rel="stylesheet" href="{{asset('dashboard/assets/vendors/choices.js/choices.min.css') }}" /> --}}
         <link rel="shortcut icon" href="{{asset('dashboard/assets/images/favicon.svg')}}" type="image/x-icon">
         <!-- Validate Jquery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
@@ -160,7 +160,7 @@
         <!-- DataTables -->
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
         <!-- Include Choices JavaScript -->
-        <script src="{{asset ('dashboard/assets/vendors/choices.js/choices.min.js') }}"></script>
+        {{-- <script src="{{asset ('dashboard/assets/vendors/choices.js/choices.min.js') }}"></script> --}}
         @toastr_js
         @toastr_render
     </body>

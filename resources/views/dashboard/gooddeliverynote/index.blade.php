@@ -87,6 +87,34 @@
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="col-12">
+                                                                            <div data-content="templateItem">
+                                                                                <div class="row" >
+                                                                                    <div class="col-8">
+                                                                                        <div class="form-group">
+                                                                                            <label for="email-id-vertical">Hàng hóa</label>
+                                                                                            <fieldset class="form-group" id="matterials_id">
+                                                                                                <select class="form-select" name="matterials_id[]">
+                                                                                                    @if(isset($matterial))
+                                                                                                        @foreach($matterial as $element)
+                                                                                                            <option value="{{$element->id}}">{{$element->name}}</option>
+                                                                                                        @endforeach
+                                                                                                    @endif
+                                                                                                </select>
+                                                                                            </fieldset>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="form-group" id="amount">
+                                                                                            <label for="email-id-vertical">Số lượng</label>
+                                                                                            <input type="number" class="form-control" name="amount[]" id="amount" 
+                                                                                            placeholder="Số lượng">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                             <input type="button" id="add" class="btn btn-primary float-right" value="Thêm hàng hóa" onclick=""></input>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="clearfix" style="padding-top: 15px;">
@@ -241,4 +269,43 @@
         @endif
     </section>
 </div>
+<script type="text/javascript">
+    var data = <?php echo json_encode($matterial, JSON_HEX_TAG); ?>;
+    var counter = 0;
+    var btn = document.getElementById('add');
+    var amount = document.getElementById('amount');
+    var matterials_id = document.getElementById('matterials_id');
+
+    function addInput() {
+        counter++;
+        var inputAmount = document.createElement("input");
+        inputAmount.setAttribute('name','amount[]');
+        inputAmount.setAttribute('type','number');
+        inputAmount.setAttribute('class','form-control');
+        inputAmount.setAttribute('placeholder','Số lượng');
+        inputAmount.setAttribute('style','margin-top: 20px');
+        amount.appendChild(inputAmount);
+
+        var selectMatterials = document.createElement('select');
+        selectMatterials.setAttribute('name','matterials_id[]');
+        selectMatterials.setAttribute('class','form-select');
+        selectMatterials.setAttribute('style','margin-top: 20px');
+
+        data.forEach(value => {
+            console.log(value)
+            var item = value.name;
+            var newOption = document.createElement("option");
+            newOption.setAttribute("value", value.id);
+            var textNode = document.createTextNode(item);
+            newOption.appendChild(textNode);
+            selectMatterials.appendChild(newOption);
+        })
+        matterials_id.appendChild(selectMatterials);
+    }
+
+    
+    btn.addEventListener('click', function() {
+        addInput();
+    }.bind(this));
+</script>
 @stop
