@@ -51,7 +51,6 @@ Route::group(['prefix' => '', 'namespace' => 'Dashboard'], function() {
 		Route::post('update-good-delivery-note-{goodDeliveryNoteId}', 'GoodDeliveryNoteController@updateGoodDeliveryNote')->name('post.update.goodDeliveryNote');
 		Route::get('delete-good-delivery-note-{goodDeliveryNoteId}', 'GoodDeliveryNoteController@deleteGoodDeliveryNote')->name('get.delete.goodDeliveryNote');
 		Route::get('good-delivery-note-detail-{goodDeliveryNoteId}', 'GoodDeliveryNoteController@getDetail')->name('get.goodDeliveryNoteDetail');
-		Route::post('create-good-delivery-note-detail-{requiredImportGoodsId}', 'GoodDeliveryNoteController@createDetail')->name('post.create.goodDeliveryNoteDetail');
 
 		Route::get('lap-hoa-don-ban-hang', 'SalesManagerController@getBillOfSale')->name('get.billofsale');
 	});

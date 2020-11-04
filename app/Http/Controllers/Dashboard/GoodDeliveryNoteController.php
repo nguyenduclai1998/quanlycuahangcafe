@@ -23,9 +23,11 @@ class GoodDeliveryNoteController extends Controller
     	->get();
 
     	$supplier = SupplierModel::get();
+    	$matterial = MatterialsModel::get();
     	$viewData = [
     		'goodDeliveryNote' => $goodDeliveryNote,
     		'supplier' => $supplier,
+    		'matterial' => $matterial
     	];
 
     	return view('dashboard.gooddeliverynote.index', $viewData);
@@ -33,6 +35,8 @@ class GoodDeliveryNoteController extends Controller
 
     public function createGoodDeliveryNote(Request $request) {
     	$data = $request->except('_token');
+
+        $array = array_combine($data['matterials_id'], $data['amount']);
     	foreach ($data as $key => $value) {
     		$data['goods_delivery_note_code'] = Str::slug($request->goods_delivery_note_code);
     	}
@@ -42,7 +46,7 @@ class GoodDeliveryNoteController extends Controller
     		'goods_delivery_note_code.unique' => "Mã phiếu nhập kho đã tồn tại.",
     		'supplier_id.required' => "Nhà cung cấp không được để trống",
     		'deliver.required' => "Nhân viên giao hàng không được để trống",
-    		'deliver_phone_number.required' => "Số điện thoại nhân viên giao hàng không được để trống"
+    		'deliver_phone_number.required' => "Số điện thoại nhân viên giao hàng không được để trống",
     	];
     	$validator = Validator::make($data, [
     		'goods_delivery_note_code' => 'required|unique:goods_delivery_note',
@@ -70,9 +74,24 @@ class GoodDeliveryNoteController extends Controller
     		$goodDeliveryNote->deliver_phone_number = $request->deliver_phone_number;
     		$goodDeliveryNote->save();
 
-    		$goodDeliveryNoteDetail = new GoodsDeliveryNoteDetailModel();
-    		$goodDeliveryNoteDetail->required_import_goods_id = $goodDeliveryNote->id;
-    		$goodDeliveryNoteDetail->save();
+            // $amounts = $request->amount;
+            // $matterials_id = $request->matterials_id;
+            foreach ($array as $key => $value) {
+                $goodDeliveryNoteDetail = new GoodsDeliveryNoteDetailModel();
+                $goodDeliveryNoteDetail->required_import_goods_id = $goodDeliveryNote->id;
+                $goodDeliveryNoteDetail->matterials_id = $key;
+                $goodDeliveryNoteDetail->amount = $value;
+                $goodDeliveryNoteDetail->save();
+            }
+            // foreach ($matterials_id as $matterial_id) {
+            //     foreach ($amounts as $amount) {
+            //         $goodDeliveryNoteDetail = new GoodsDeliveryNoteDetailModel();
+            //         $goodDeliveryNoteDetail->required_import_goods_id = $goodDeliveryNote->id;
+            //         $goodDeliveryNoteDetail->matterials_id = $matterial_id;
+            //         $goodDeliveryNoteDetail->amount = $amount;
+            //         $goodDeliveryNoteDetail->save();
+            //     }
+            // }
     		toastr()->success("Thêm mới thành công.");
     		return redirect()->back();
     	}
@@ -80,7 +99,6 @@ class GoodDeliveryNoteController extends Controller
 
     public function updateGoodDeliveryNote(Request $request, $goodDeliveryNoteId) {
     	$data = $request->except('_token');
-
     	$messages = [
     		'supplier_id.required' => "Nhà cung cấp không được để trống",
     		'deliver.required' => "Nhân viên giao hàng không được để trống",
@@ -115,7 +133,8 @@ class GoodDeliveryNoteController extends Controller
 
     public function deleteGoodDeliveryNote($goodDeliveryNoteId) {
     	$goodDeliveryNote = GoodsDeliveryNoteModel::find($goodDeliveryNoteId);
-    	if($goodDeliveryNote) {
+        $goodDeliveryNoteDetail = \DB::table('goodsdeliverynotedetail')->where('goodsdeliverynotedetail.required_import_goods_id',$goodDeliveryNoteId)->delete();
+    	if($goodDeliveryNote) { 
     		$goodDeliveryNote->delete();
     		toastr()->success("Xóa thành công.");
     		return redirect()->back();
@@ -126,50 +145,24 @@ class GoodDeliveryNoteController extends Controller
     }
 
     public function getDetail($goodDeliveryNoteId) {
-    	$goodDeliveryNoteDetail = GoodsDeliveryNoteDetailModel::select('goods_delivery_note.goods_delivery_note_code', 'goodsdeliverynotedetail.matterials_id', 'goodsdeliverynotedetail.required_import_goods_id', 'goodsdeliverynotedetail.amount', 'matterials.name')
+        $goodDeliveryNote = GoodsDeliveryNoteModel::select('goods_delivery_note.id','goods_delivery_note.goods_delivery_note_code', 'goods_delivery_note.supplier_id', 'goods_delivery_note.deliver','goods_delivery_note.issue_date', 'goods_delivery_note.deliver_phone_number', 'supplier.name', 'users.name as staffIsName')
+        ->join("supplier", "goods_delivery_note.supplier_id", "=", "supplier.id")
+        ->join("users","goods_delivery_note.user_id", "=", "users.id")
+        ->where('goods_delivery_note.id',$goodDeliveryNoteId)
+        ->get();
+
+    	$goodDeliveryNoteDetail = GoodsDeliveryNoteDetailModel::select('goods_delivery_note.goods_delivery_note_code', 'goodsdeliverynotedetail.matterials_id', 'goodsdeliverynotedetail.required_import_goods_id', 'goodsdeliverynotedetail.amount', 'matterials.name', 'supplier.name as supplierName')
     	->join('goods_delivery_note', 'goods_delivery_note.id', '=', 'goodsdeliverynotedetail.required_import_goods_id')
+        ->join("supplier", "goods_delivery_note.supplier_id", "=", "supplier.id")
     	->leftjoin('matterials', 'matterials.id', '=', 'goodsdeliverynotedetail.matterials_id')
     	->where('goodsdeliverynotedetail.required_import_goods_id', '=', $goodDeliveryNoteId)
     	->get();
-    	$matterial = MatterialsModel::get();
     	$viewData = [
     		'goodDeliveryNoteDetail' => $goodDeliveryNoteDetail,
-    		'matterial' => $matterial
+            'goodDeliveryNote' => $goodDeliveryNote
     	];
 
     	return view('dashboard.gooddeliverynote.detail', $viewData);
     }
 
-    public function createDetail(Request $request, $requiredImportGoodsId) {
-    	$data = $request->except('_token');
-
-    	$messages = [
-    		'matterials_id.required' => "Hàng hóa không được để trống",
-    		'amount.required' => "Số lượng không được để trống"
-    	];
-    	$validator = Validator::make($data, [
-    		'matterials_id' => 'required',
-    		'amount' => 'required',
-    	], $messages);
-
-    	if($validator->fails()) {
-    		$errors = $validator->errors();
-    		$errors = $errors->toArray();
-    		foreach ($errors as $value) {
-    			foreach ($value as $element) {
-    				toastr()->error($element);
-    			}
-    		}
-    		return redirect()->back();
-    	} else {
-    		$goodDeliveryNoteDetail = new GoodsDeliveryNoteDetailModel();
-    		$goodDeliveryNoteDetail->required_import_goods_id = $requiredImportGoodsId;
-    		$goodDeliveryNoteDetail->matterials_id = $request->matterials_id;
-    		$goodDeliveryNoteDetail->amount = $request->amount;
-    		dd($goodDeliveryNoteDetail);
-    		$goodDeliveryNoteDetail->save();
-    		toastr()->success("Thêm mới thành công.");
-    		return redirect()->back();
-    	}
-    }
 }
