@@ -30,6 +30,38 @@
         font-family: 'FontAwesome';
         font-weight: bold;
     }
+
+
+
+    [data-action="addField1"]::after {
+        content: '\f067';
+        display: inline-block;
+        font-family: 'FontAwesome';
+        font-weight: bold;
+    }
+    [data-action="addField1"]:hover {
+        cursor: pointer;
+        background-color: #2196F3
+    }
+    [data-action="minusField1"]:hover {
+        cursor: pointer;
+        background-color: #dc3333
+    }
+
+    [data-action="addField1"] {
+        background-color: #2196F3;
+        border: none;
+    }
+    [data-action="minusField1"] {
+        background-color: #dc3333;
+        border: none;
+    }
+    [data-action="minusField1"]::after {
+        content: '\f068';
+        display: inline-block;
+        font-family: 'FontAwesome';
+        font-weight: bold;
+    }
 </style>
 <div class="main-content container-fluid">
     <div class="page-title">
@@ -119,7 +151,6 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-12">
-                                                                            
                                                                             <div data-content="templateItem">
                                                                                 <div class="row" >
                                                                                     <div class="col-7">
@@ -130,7 +161,7 @@
                                                                                                     @if(isset($matterial))
                                                                                                         <option value="">---Chọn hàng hóa---</option>   
                                                                                                         @foreach($matterial as $element)
-                                                                                                            <option value="{{$element->id}}">{{$element->name}}</option>
+                                                                                                            <option value="{{$element->id}}">{{$element->name}} - {{$element->unit}}</option>
                                                                                                         @endforeach
                                                                                                     @endif
                                                                                                 </select>
@@ -154,7 +185,6 @@
                                                                             <div data-content="templateItem2">
                                                                                         
                                                                             </div>
-                                                                           
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -273,6 +303,87 @@
                                                                                                                 <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>
+                                                                                                    <div class="col-12">
+                                                                                                        @foreach($goodDeliveryNoteDetails as $key => $deliveryNoteDetails)
+                                                                                                        @if($value->id === $key)
+                                                                                                            @foreach($deliveryNoteDetails as $deliveryNoteDetail)
+                                                                                                                @foreach($deliveryNoteDetail as $delivery)
+                                                                                                                    <div data-content="templateItem3">
+                                                                                                                        <div class="row" >
+                                                                                                                            <div class="col-7">
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <label for="email-id-vertical">Hàng hóa</label>
+                                                                                                                                    <fieldset class="form-group" id="matterials_id">
+                                                                                                                                        <select class="form-select" name="matterials_id[]">
+                                                                                                                                            @if(isset($matterial))
+                                                                                                                                                <option value="">---Chọn hàng hóa---</option>   
+
+                                                                                                                                                @foreach($matterial as $element)
+                                                                                                                                                    <option value="{{$element->id}}" {{$element->id == $delivery->matterials_id ? "selected='seleted'" : "" }}>{{$element->name}} - {{$element->unit}}</option>
+                                                                                                                                                @endforeach
+                                                                                                                                            @endif
+                                                                                                                                        </select>
+                                                                                                                                    </fieldset>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-3">
+                                                                                                                                <div class="form-group" id="amount">
+                                                                                                                                    <label for="email-id-vertical">Số lượng</label>
+                                                                                                                                    <input type="number" class="form-control" value="{{$delivery->amount}}" name="amount[]" id="amount" 
+                                                                                                                                    placeholder="Số lượng">
+                                                                                                                                </div>
+                                                                                                                            </div>
+
+                                                                                                                            <div class="col-2">
+                                                                                                                                 <label for="email-id-vertical"></label>
+                                                                                                                                 <button type="button" class="btn btn-primary" data-action="minusField"></button>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    <div data-content="templateItem4">
+                                                                                                                                
+                                                                                                                    </div>
+                                                                                                                @endforeach
+                                                                                                            @endforeach
+                                                                                                        @endif
+                                                                                                        @endforeach
+                                                                                                    </div>
+                                                                                                    <div class="col-12">
+                                                                                                        <div data-content="templateItem">
+                                                                                                            <div class="row" >
+                                                                                                                <div class="col-7">
+                                                                                                                    <div class="form-group">
+                                                                                                                        <label for="email-id-vertical">Hàng hóa</label>
+                                                                                                                        <fieldset class="form-group" id="matterials_id">
+                                                                                                                            <select class="form-select" name="matterials_id[]">
+                                                                                                                                @if(isset($matterial))
+                                                                                                                                    <option value="">---Chọn hàng hóa---</option>   
+                                                                                                                                    @foreach($matterial as $element)
+                                                                                                                                        <option value="{{$element->id}}">{{$element->name}} - {{$element->unit}}</option>
+                                                                                                                                    @endforeach
+                                                                                                                                @endif
+                                                                                                                            </select>
+                                                                                                                        </fieldset>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="col-3">
+                                                                                                                    <div class="form-group" id="amount">
+                                                                                                                        <label for="email-id-vertical">Số lượng</label>
+                                                                                                                        <input type="number" class="form-control" name="amount[]" id="amount" 
+                                                                                                                        placeholder="Số lượng">
+                                                                                                                    </div>
+                                                                                                                </div>
+
+                                                                                                                <div class="col-2">
+                                                                                                                     <label for="email-id-vertical"></label>
+                                                                                                                     <button type="button" class="btn btn-primary" data-action="addField"></button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div data-content="templateItem2">
+                                                                                                                    
+                                                                                                        </div>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="clearfix" style="padding-top: 15px;">
@@ -325,9 +436,24 @@
             $(this).parent().parent().remove();
         });
     }
+
+    function plusField1(){
+        let template1 = $('[data-content=templateItem3]').html();
+
+        $('body').on('click',' [data-action=addField1]', function(){
+            $('[data-content=templateItem4]').append(template1);
+``
+            $(this).attr('data-action','minusField1');
+        });
+
+        $('body').on('click', ' [data-action=minusField1]', function(){ 
+            $(this).parent().parent().parent().remove();
+        });
+    }
 </script>
 
 <script>
     plusField('[data-wrap=templateItem2]');
+    plusField1('[data-wrap=templateItem4]');
 </script>
 @stop
