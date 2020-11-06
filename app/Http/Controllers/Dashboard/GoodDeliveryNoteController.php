@@ -21,13 +21,25 @@ class GoodDeliveryNoteController extends Controller
     	->join("supplier", "goods_delivery_note.supplier_id", "=", "supplier.id")
     	->join("users","goods_delivery_note.user_id", "=", "users.id")
     	->get();
-        
+        $goodDeliveryNoteDetails = [];
+        foreach ($goodDeliveryNote as $key => $value) {
+            $goodDeliveryNoteDetail = GoodsDeliveryNoteDetailModel::select('goods_delivery_note.goods_delivery_note_code', 'goodsdeliverynotedetail.matterials_id', 'goodsdeliverynotedetail.required_import_goods_id', 'goodsdeliverynotedetail.amount', 'matterials.name', 'matterials.unit', 'supplier.name as supplierName')
+            ->join('goods_delivery_note', 'goods_delivery_note.id', '=', 'goodsdeliverynotedetail.required_import_goods_id')
+            ->join("supplier", "goods_delivery_note.supplier_id", "=", "supplier.id")
+            ->leftjoin('matterials', 'matterials.id', '=', 'goodsdeliverynotedetail.matterials_id')
+            ->where('goodsdeliverynotedetail.required_import_goods_id', '=', $value['id'])
+            ->get();
+            $goodDeliveryNoteDetails[$value['id']][] = $goodDeliveryNoteDetail;
+        }
+        // dd($goodDeliveryNoteDetails);
     	$supplier = SupplierModel::get();
     	$matterial = MatterialsModel::get();
+        // dd($matterial);
     	$viewData = [
     		'goodDeliveryNote' => $goodDeliveryNote,
     		'supplier' => $supplier,
-    		'matterial' => $matterial
+    		'matterial' => $matterial,
+            'goodDeliveryNoteDetails' => $goodDeliveryNoteDetails
     	];
 
     	return view('dashboard.gooddeliverynote.index', $viewData);
@@ -57,8 +69,7 @@ class GoodDeliveryNoteController extends Controller
     		'supplier_id' => 'required',
     		'deliver' => 'required',
     		'deliver_phone_number' => 'required',
-            'matterials_id.*' => 'required',
-            'amount.*' => 'required|numeric|min:1'
+            'amount.*' => 'numeric|min:1'
     	], $messages);
 
     	if($validator->fails()) {
@@ -94,6 +105,13 @@ class GoodDeliveryNoteController extends Controller
 
     public function updateGoodDeliveryNote(Request $request, $goodDeliveryNoteId) {
     	$data = $request->except('_token');
+
+        $array = array_combine($data['matterials_id'], $data['amount']);
+        foreach ($data as $key => $value) {
+            $data['goods_delivery_note_code'] = Str::slug($request->goods_delivery_note_code);
+        }
+        $array = array_filter($array);
+        // dd($array);
     	$messages = [
     		'supplier_id.required' => "Nhà cung cấp không được để trống",
     		'deliver.required' => "Nhân viên giao hàng không được để trống",
@@ -115,12 +133,21 @@ class GoodDeliveryNoteController extends Controller
     		}
     		return redirect()->back();
     	} else {
+            $goodDeliveryNoteDetailDelete = \DB::table('goodsdeliverynotedetail')->where('goodsdeliverynotedetail.required_import_goods_id',$goodDeliveryNoteId)->delete();
     		$goodDeliveryNote = new GoodsDeliveryNoteModel();
     		$goodDeliveryNote = GoodsDeliveryNoteModel::find($goodDeliveryNoteId);
     		$goodDeliveryNote->supplier_id = $request->supplier_id;
     		$goodDeliveryNote->deliver = $request->deliver;
     		$goodDeliveryNote->deliver_phone_number = $request->deliver_phone_number;
     		$goodDeliveryNote->update();
+
+            foreach ($array as $key => $value) {
+                $goodDeliveryNoteDetail = new GoodsDeliveryNoteDetailModel();
+                $goodDeliveryNoteDetail->required_import_goods_id = $goodDeliveryNote->id;
+                $goodDeliveryNoteDetail->matterials_id = $key;
+                $goodDeliveryNoteDetail->amount = $value;
+                $goodDeliveryNoteDetail->save();
+            }
     		toastr()->success("Cập nhật thành công.");
     		return redirect()->back();
     	}

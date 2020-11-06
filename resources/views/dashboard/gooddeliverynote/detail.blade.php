@@ -75,8 +75,8 @@
                         <tr>
                             <th>STT</th>
                             <th>Tên hàng hóa</th>
-                            <th>Số lượng</th>
                             <th>Đơn vị tính</th>
+                            <th>Số lượng</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,8 +84,8 @@
                             <tr>
                                 <td>{{$k + 1}}</td>
                                 <td>{{$value->name}}</td>
-                                <td>{{$value->amount}}</td>
                                 <td>{{$value->unit}}</td>
+                                <td>{{$value->amount}}</td>
                             </tr>
                         @endforeach
                     </tbody>
