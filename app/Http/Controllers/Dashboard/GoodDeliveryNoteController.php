@@ -21,7 +21,7 @@ class GoodDeliveryNoteController extends Controller
     	->join("supplier", "goods_delivery_note.supplier_id", "=", "supplier.id")
     	->join("users","goods_delivery_note.user_id", "=", "users.id")
     	->get();
-
+        
     	$supplier = SupplierModel::get();
     	$matterial = MatterialsModel::get();
     	$viewData = [
@@ -47,12 +47,18 @@ class GoodDeliveryNoteController extends Controller
     		'supplier_id.required' => "Nhà cung cấp không được để trống",
     		'deliver.required' => "Nhân viên giao hàng không được để trống",
     		'deliver_phone_number.required' => "Số điện thoại nhân viên giao hàng không được để trống",
+            'matterials_id.*.required' => "Hàng hóa không được để trống",
+            'amount.*.required' => "Số lượng không được để trống",
+            'amount.*.numeric' => "Số lượng phải là số nguyên dương.",
+            'amount.*.min' => "Số lượng nhỏ nhất phải là 1",
     	];
     	$validator = Validator::make($data, [
     		'goods_delivery_note_code' => 'required|unique:goods_delivery_note',
     		'supplier_id' => 'required',
     		'deliver' => 'required',
     		'deliver_phone_number' => 'required',
+            'matterials_id.*' => 'required',
+            'amount.*' => 'required|numeric|min:1'
     	], $messages);
 
     	if($validator->fails()) {
@@ -74,8 +80,6 @@ class GoodDeliveryNoteController extends Controller
     		$goodDeliveryNote->deliver_phone_number = $request->deliver_phone_number;
     		$goodDeliveryNote->save();
 
-            // $amounts = $request->amount;
-            // $matterials_id = $request->matterials_id;
             foreach ($array as $key => $value) {
                 $goodDeliveryNoteDetail = new GoodsDeliveryNoteDetailModel();
                 $goodDeliveryNoteDetail->required_import_goods_id = $goodDeliveryNote->id;
@@ -83,15 +87,6 @@ class GoodDeliveryNoteController extends Controller
                 $goodDeliveryNoteDetail->amount = $value;
                 $goodDeliveryNoteDetail->save();
             }
-            // foreach ($matterials_id as $matterial_id) {
-            //     foreach ($amounts as $amount) {
-            //         $goodDeliveryNoteDetail = new GoodsDeliveryNoteDetailModel();
-            //         $goodDeliveryNoteDetail->required_import_goods_id = $goodDeliveryNote->id;
-            //         $goodDeliveryNoteDetail->matterials_id = $matterial_id;
-            //         $goodDeliveryNoteDetail->amount = $amount;
-            //         $goodDeliveryNoteDetail->save();
-            //     }
-            // }
     		toastr()->success("Thêm mới thành công.");
     		return redirect()->back();
     	}
@@ -151,7 +146,7 @@ class GoodDeliveryNoteController extends Controller
         ->where('goods_delivery_note.id',$goodDeliveryNoteId)
         ->get();
 
-    	$goodDeliveryNoteDetail = GoodsDeliveryNoteDetailModel::select('goods_delivery_note.goods_delivery_note_code', 'goodsdeliverynotedetail.matterials_id', 'goodsdeliverynotedetail.required_import_goods_id', 'goodsdeliverynotedetail.amount', 'matterials.name', 'supplier.name as supplierName')
+    	$goodDeliveryNoteDetail = GoodsDeliveryNoteDetailModel::select('goods_delivery_note.goods_delivery_note_code', 'goodsdeliverynotedetail.matterials_id', 'goodsdeliverynotedetail.required_import_goods_id', 'goodsdeliverynotedetail.amount', 'matterials.name', 'matterials.unit', 'supplier.name as supplierName')
     	->join('goods_delivery_note', 'goods_delivery_note.id', '=', 'goodsdeliverynotedetail.required_import_goods_id')
         ->join("supplier", "goods_delivery_note.supplier_id", "=", "supplier.id")
     	->leftjoin('matterials', 'matterials.id', '=', 'goodsdeliverynotedetail.matterials_id')

@@ -125,7 +125,7 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Drink code</th>
+                            <th>Mã đồ uống</th>
                             <th>Tên</th>
                             <th>Giá tiền</th>
                             <th>Đơn vị tính</th>

@@ -108,7 +108,7 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Table code</th>
+                            <th>Mã bàn</th>
                             <th>Số bàn</th>
                             <th>Trạng thái</th>
                             <th>Thao tác</th>
@@ -159,7 +159,7 @@
                                                                                                 <div class="row">
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
-                                                                                                            <label for="first-name-vertical">Table code</label>
+                                                                                                            <label for="first-name-vertical">Mã bàn</label>
                                                                                                             <input style="pointer-events:none;" type="text" class="form-control" name="drinks_code" value="{{$tb->table_code}}" placeholder="Table code" >
                                                                                                             <label for="text" class="error"></label>
                                                                                                         </div>
