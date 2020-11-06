@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="{{asset('dashboard/assets/vendors/chartjs/Chart.min.css')}}">
         <link rel="stylesheet" href="{{asset('dashboard/assets/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
         <link rel="stylesheet" href="{{asset('dashboard/assets/css/app.css')}}">
+        <link rel="stylesheet" href="{{ asset('dashboard/font-awesome/css/font-awesome.min.css') }}">
+        {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"> --}}
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Include Choices CSS -->
         {{-- <link rel="stylesheet" href="{{asset('dashboard/assets/vendors/choices.js/choices.min.css') }}" /> --}}
@@ -17,6 +19,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
         @toastr_css
     </head>
+    <style type="text/css">
+        *{
+            font-family: sans-serif!important;
+        }
+    </style>
     <body>
         <div id="app">
             <div id="sidebar" class='active'>
@@ -141,10 +148,6 @@
                         <div class="float-left">
                             <p>2020 &copy; Trần Việt Tiến</p>
                         </div>
-                        <div class="float-right">
-                            <p>Crafted with <span class='text-danger'><i data-feather="heart"></i></span> by <a href="https://www.facebook.com/nguyenduclai/" target="_blank">Nguyễn Đức Lai</a></p>
-                        </div>
-                    </div>
                 </footer>
             </div>
         </div>
@@ -156,9 +159,10 @@
         <script src="{{asset ('dashboard/assets/js/pages/dashboard.js') }}"></script>
         <script src="{{asset ('dashboard/assets/js/main.js') }}"></script>
         <script src="{{asset ('dashboard/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
+        {{-- <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> --}}
         <script src="{{asset ('dashboard/assets/js/vendors.js') }}"></script>
         <!-- DataTables -->
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+        {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> --}}
         <!-- Include Choices JavaScript -->
         {{-- <script src="{{asset ('dashboard/assets/vendors/choices.js/choices.min.js') }}"></script> --}}
         @toastr_js

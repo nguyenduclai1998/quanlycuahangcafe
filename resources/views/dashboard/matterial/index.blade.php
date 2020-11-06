@@ -103,7 +103,7 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Matterials code</th>
+                            <th>Mã hàng hóa</th>
                             <th>Tên hàng hóa</th>
                             <th>Đơn vị tính</th>
                             <th>Thao tác</th>

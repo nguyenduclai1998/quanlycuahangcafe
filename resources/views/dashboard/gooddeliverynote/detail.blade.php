@@ -74,20 +74,18 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Mã phiếu nhập kho</th>
-                            <th>Nhà cung cấp</th>
                             <th>Tên hàng hóa</th>
                             <th>Số lượng</th>
+                            <th>Đơn vị tính</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($goodDeliveryNoteDetail as $k => $value)
                             <tr>
                                 <td>{{$k + 1}}</td>
-                                <td>{{$value->goods_delivery_note_code}}</td>
-                                <td>{{$value->supplierName}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->amount}}</td>
+                                <td>{{$value->unit}}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -95,7 +95,7 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Supplier code</th>
+                            <th>Mã nhà cung cấp</th>
                             <th>Tên nhà cung cấp</th>
                             <th>Thao tác</th>
                         </tr>

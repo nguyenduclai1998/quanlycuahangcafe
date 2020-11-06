@@ -1,5 +1,36 @@
 @extends('layouts.app_master_dashboard')
 @section('content')
+<style type="text/css">
+    [data-action="addField"]::after {
+        content: '\f067';
+        display: inline-block;
+        font-family: 'FontAwesome';
+        font-weight: bold;
+    }
+    [data-action="addField"]:hover {
+        cursor: pointer;
+        background-color: #2196F3
+    }
+    [data-action="minusField"]:hover {
+        cursor: pointer;
+        background-color: #dc3333
+    }
+
+    [data-action="addField"] {
+        background-color: #2196F3;
+        border: none;
+    }
+    [data-action="minusField"] {
+        background-color: #dc3333;
+        border: none;
+    }
+    [data-action="minusField"]::after {
+        content: '\f068';
+        display: inline-block;
+        font-family: 'FontAwesome';
+        font-weight: bold;
+    }
+</style>
 <div class="main-content container-fluid">
     <div class="page-title">
         <div class="row">
@@ -88,14 +119,16 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-12">
+                                                                            
                                                                             <div data-content="templateItem">
                                                                                 <div class="row" >
-                                                                                    <div class="col-8">
+                                                                                    <div class="col-7">
                                                                                         <div class="form-group">
                                                                                             <label for="email-id-vertical">Hàng hóa</label>
                                                                                             <fieldset class="form-group" id="matterials_id">
                                                                                                 <select class="form-select" name="matterials_id[]">
                                                                                                     @if(isset($matterial))
+                                                                                                        <option value="">---Chọn hàng hóa---</option>   
                                                                                                         @foreach($matterial as $element)
                                                                                                             <option value="{{$element->id}}">{{$element->name}}</option>
                                                                                                         @endforeach
@@ -104,16 +137,24 @@
                                                                                             </fieldset>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-4">
+                                                                                    <div class="col-3">
                                                                                         <div class="form-group" id="amount">
                                                                                             <label for="email-id-vertical">Số lượng</label>
                                                                                             <input type="number" class="form-control" name="amount[]" id="amount" 
                                                                                             placeholder="Số lượng">
                                                                                         </div>
                                                                                     </div>
+
+                                                                                    <div class="col-2">
+                                                                                         <label for="email-id-vertical"></label>
+                                                                                         <button type="button" class="btn btn-primary" data-action="addField"></button>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                             <input type="button" id="add" class="btn btn-primary float-right" value="Thêm hàng hóa" onclick=""></input>
+                                                                            <div data-content="templateItem2">
+                                                                                        
+                                                                            </div>
+                                                                           
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -270,42 +311,23 @@
     </section>
 </div>
 <script type="text/javascript">
-    var data = <?php echo json_encode($matterial, JSON_HEX_TAG); ?>;
-    var counter = 0;
-    var btn = document.getElementById('add');
-    var amount = document.getElementById('amount');
-    var matterials_id = document.getElementById('matterials_id');
 
-    function addInput() {
-        counter++;
-        var inputAmount = document.createElement("input");
-        inputAmount.setAttribute('name','amount[]');
-        inputAmount.setAttribute('type','number');
-        inputAmount.setAttribute('class','form-control');
-        inputAmount.setAttribute('placeholder','Số lượng');
-        inputAmount.setAttribute('style','margin-top: 20px');
-        amount.appendChild(inputAmount);
+    function plusField(){
+        let template = $('[data-content=templateItem]').html();
 
-        var selectMatterials = document.createElement('select');
-        selectMatterials.setAttribute('name','matterials_id[]');
-        selectMatterials.setAttribute('class','form-select');
-        selectMatterials.setAttribute('style','margin-top: 20px');
+        $('body').on('click',' [data-action=addField]', function(){
+            $('[data-content=templateItem2]').append(template);
+``
+            $(this).attr('data-action','minusField');
+        });
 
-        data.forEach(value => {
-            console.log(value)
-            var item = value.name;
-            var newOption = document.createElement("option");
-            newOption.setAttribute("value", value.id);
-            var textNode = document.createTextNode(item);
-            newOption.appendChild(textNode);
-            selectMatterials.appendChild(newOption);
-        })
-        matterials_id.appendChild(selectMatterials);
+        $('body').on('click', ' [data-action=minusField]', function(){ 
+            $(this).parent().parent().remove();
+        });
     }
+</script>
 
-    
-    btn.addEventListener('click', function() {
-        addInput();
-    }.bind(this));
+<script>
+    plusField('[data-wrap=templateItem2]');
 </script>
 @stop
