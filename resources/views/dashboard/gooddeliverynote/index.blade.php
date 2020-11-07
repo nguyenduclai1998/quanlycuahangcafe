@@ -125,6 +125,7 @@
                                                                                 <label for="email-id-vertical">Nhà cung cấp</label>
                                                                                 <fieldset class="form-group">
                                                                                     <select class="choices form-select" name="supplier_id">
+                                                                                        <option value="">--- Chọn nhà cung cấp ---</option>
                                                                                         @if(isset($supplier))
                                                                                             @foreach($supplier as $element)
                                                                                                 <option value="{{$element->id}}">{{$element->name}}</option>
@@ -278,6 +279,7 @@
                                                                                                             <label for="email-id-vertical">Nhà cung cấp</label>
                                                                                                             <fieldset class="form-group">
                                                                                                                 <select class="choices form-select" name="supplier_id">
+                                                                                                                    <option value="">--- Chọn nhà cung cấp ---</option>
                                                                                                                     @if(isset($supplier))
                                                                                                                         @foreach($supplier as $element)
                                                                                                                             <option value="{{$element->id}}"{{$element->id == $value->supplier_id ? "selected='seleted'" : "" }}>{{$element->name}}</option>
