@@ -10,10 +10,8 @@
         <link rel="stylesheet" href="{{asset('dashboard/assets/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
         <link rel="stylesheet" href="{{asset('dashboard/assets/css/app.css')}}">
         <link rel="stylesheet" href="{{ asset('dashboard/font-awesome/css/font-awesome.min.css') }}">
-        {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"> --}}
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Include Choices CSS -->
-        {{-- <link rel="stylesheet" href="{{asset('dashboard/assets/vendors/choices.js/choices.min.css') }}" /> --}}
         <link rel="shortcut icon" href="{{asset('dashboard/assets/images/favicon.svg')}}" type="image/x-icon">
         <!-- Validate Jquery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>

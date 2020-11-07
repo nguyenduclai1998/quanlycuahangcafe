@@ -69,7 +69,7 @@
                                                                         <div class="col-12">
                                                                             <div class="form-group">
                                                                                 <label for="email-id-vertical">Giá tiền</label>
-                                                                                <input type="number" id="number" class="form-control" name="price"
+                                                                                <input type="number" class="form-control" name="price"
                                                                                     placeholder="Giá tiền">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
@@ -77,7 +77,7 @@
                                                                         <div class="col-12">
                                                                             <div class="form-group">
                                                                                 <label for="contact-info-vertical">Đơn vị tính</label>
-                                                                                <input type="text" id="unit" class="form-control" name="unit"
+                                                                                <input type="text" class="form-control" name="unit"
                                                                                     placeholder="Đơn vị tính">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
@@ -197,14 +197,14 @@
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
                                                                                                             <label for="email-id-vertical">Giá tiền</label>
-                                                                                                            <input type="number" id="number" class="form-control" name="price" value="{{$mn->price}}" placeholder="Giá tiền">
+                                                                                                            <input type="number" class="form-control" name="price" value="{{$mn->price}}" placeholder="Giá tiền">
                                                                                                             <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
                                                                                                             <label for="contact-info-vertical">Đơn vị tính</label>
-                                                                                                            <input type="text" id="unit" class="form-control" name="unit" value="{{$mn->unit}}" placeholder="Đơn vị tính">
+                                                                                                            <input type="text" class="form-control" name="unit" value="{{$mn->unit}}" placeholder="Đơn vị tính">
                                                                                                             <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>
