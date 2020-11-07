@@ -24,8 +24,8 @@ Route::group(['prefix' => '', 'namespace' => 'Dashboard'], function() {
 
 		Route::get('quan-ly-thuc-don', 'MenuManagerController@getMenu')->name('get.menu');
 		Route::post('create-menu', 'MenuManagerController@createMenu')->name('post.create.menu');
-		Route::post('update-menu-{idmMenu}', 'MenuManagerController@updateMenu')->name('post.update.menu');
-		Route::get('delete-menu-{idmMenu}', 'MenuManagerController@deleteMenu')->name('get.delete.menu');
+		Route::post('update-menu/{idmMenu}', 'MenuManagerController@updateMenu')->name('post.update.menu');
+		Route::get('delete-menu/{idmMenu}', 'MenuManagerController@deleteMenu')->name('get.delete.menu');
 
 		Route::get('quan-ly-ban', 'TableManagerController@getTable')->name('get.table');
 		Route::post('create-table', 'TableManagerController@createTable')->name('post.create.table');
