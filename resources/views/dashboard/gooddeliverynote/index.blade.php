@@ -108,7 +108,7 @@
                                                 <div class="card" style="box-shadow:none;">
                                                     <div class="card-content">
                                                         <div class="card-body">
-                                                            <form class="form form-vertical" action=" {{ route('post.create.goodDeliveryNote') }}" method="POST" id="createMenu">
+                                                            <form class="form form-vertical" action="{{route('post.create.goodDeliveryNote')}}" method="POST" id="createMenu">
                                                                 @csrf
                                                                 <div class="form-body">
                                                                     <div class="row">
@@ -237,7 +237,7 @@
                                 <td>{{$value->deliver_phone_number}}</td>
                                 <td>{{$value->issue_date}}</td>
                                 <td class="active">
-                                    <a href="{{ route('get.goodDeliveryNoteDetail', $value->id) }}" class='sidebar-link'>
+                                    <a href="{{route('get.goodDeliveryNoteDetail', $value->id)}}" class='sidebar-link'>
                                         <i data-feather="delete" width="20"></i> 
                                         <span>Xem chi tiết</span>
                                     </a>

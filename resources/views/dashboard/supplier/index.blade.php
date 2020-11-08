@@ -45,7 +45,7 @@
                                                 <div class="card" style="box-shadow:none;">
                                                     <div class="card-content">
                                                         <div class="card-body">
-                                                            <form class="form form-vertical" action=" {{ route('post.create.supplier') }}" method="POST" id="createMenu">
+                                                            <form class="form form-vertical" action="{{route('post.create.supplier')}}" method="POST" id="createMenu">
                                                                 @csrf
                                                                 <div class="form-body">
                                                                     <div class="row">
