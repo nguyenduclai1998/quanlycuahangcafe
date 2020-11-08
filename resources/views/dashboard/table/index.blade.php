@@ -60,7 +60,7 @@
                                                                         <div class="col-12">
                                                                             <div class="form-group">
                                                                                 <label for="email-id-vertical">Số bàn</label>
-                                                                                <input type="number" id="number" class="form-control" name="number"
+                                                                                <input type="number" class="form-control" name="number"
                                                                                     placeholder="Số bàn">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
@@ -141,7 +141,7 @@
                                                         role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Sửa thực đơn</h5>
+                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Sửa bàn</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <i data-feather="x"></i>
                                                                 </button>
@@ -160,7 +160,7 @@
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
                                                                                                             <label for="first-name-vertical">Mã bàn</label>
-                                                                                                            <input style="pointer-events:none;" type="text" class="form-control" name="drinks_code" value="{{$tb->table_code}}" placeholder="Table code" >
+                                                                                                            <input style="pointer-events:none;" type="text" class="form-control" name="table_code" value="{{$tb->table_code}}" placeholder="Table code" >
                                                                                                             <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>
