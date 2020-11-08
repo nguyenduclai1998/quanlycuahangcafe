@@ -53,7 +53,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="first-name-vertical">Mã hàng hóa</label>
                                                                                 <input type="text" class="form-control" name="matterials_code"
-                                                                                    placeholder="Mã nhà cung cấp">
+                                                                                    placeholder="Mã nhà hàng hóa">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
                                                                         </div>
@@ -61,7 +61,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="email-id-vertical">Tên hàng hóa</label>
                                                                                 <input type="text" id="number" class="form-control" name="name"
-                                                                                    placeholder="Tên nhà cung cấp">
+                                                                                    placeholder="Tên hàng hóa">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
                                                                         </div>
@@ -69,7 +69,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="email-id-vertical">Đơn vị tính</label>
                                                                                 <input type="text" id="unit" class="form-control" name="unit"
-                                                                                    placeholder="Tên nhà cung cấp">
+                                                                                    placeholder="Đơn vị tính">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
                                                                         </div>
@@ -127,7 +127,7 @@
                                                         role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Sửa thực đơn</h5>
+                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Sửa hàng hóa</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <i data-feather="x"></i>
                                                                 </button>
@@ -146,21 +146,21 @@
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
                                                                                                             <label for="first-name-vertical">Mã nhà hàng hóa</label>
-                                                                                                            <input style="pointer-events:none;" type="text" class="form-control" name="matterials_code" value="{{$value->matterials_code}}" placeholder="Mã nhà cung cấp" >
+                                                                                                            <input style="pointer-events:none;" type="text" class="form-control" name="matterials_code" value="{{$value->matterials_code}}" placeholder="Mã hàng hóa" >
                                                                                                             <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
                                                                                                             <label for="email-id-vertical">Tên tên hàng hóa</label>
-                                                                                                            <input type="text" id="number" class="form-control" name="name" value="{{$value->name}}" placeholder="Số bàn">
+                                                                                                            <input type="text" class="form-control" name="name" value="{{$value->name}}" placeholder="Tên hàng hóa">
                                                                                                             <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
                                                                                                             <label for="email-id-vertical">Đơn vị tính</label>
-                                                                                                            <input type="text" id="unit" class="form-control" name="unit" value="{{$value->unit}}" placeholder="Số bàn">
+                                                                                                            <input type="text" class="form-control" name="unit" value="{{$value->unit}}" placeholder="Đơn vị tính">
                                                                                                             <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>

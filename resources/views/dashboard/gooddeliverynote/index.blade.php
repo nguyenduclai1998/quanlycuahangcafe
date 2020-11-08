@@ -116,7 +116,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="first-name-vertical">Mã phiếu</label>
                                                                                 <input type="text" class="form-control" name="goods_delivery_note_code"
-                                                                                    placeholder="Mã nhà cung cấp">
+                                                                                    placeholder="Mã phiếu">
                                                                                     <label for="text" class="error"></label>
                                                                             </div>
                                                                         </div>
@@ -251,7 +251,7 @@
                                                         role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Sửa thực đơn</h5>
+                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Sửa phiếu nhập kho</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <i data-feather="x"></i>
                                                                 </button>
@@ -270,7 +270,7 @@
                                                                                                     <div class="col-12">
                                                                                                         <div class="form-group">
                                                                                                             <label for="first-name-vertical">Mã nhà hàng hóa</label>
-                                                                                                            <input style="pointer-events:none;" type="text" class="form-control" name="goods_delivery_note_code" value="{{$value->goods_delivery_note_code}}" placeholder="Mã nhà cung cấp" >
+                                                                                                            <input style="pointer-events:none;" type="text" class="form-control" name="goods_delivery_note_code" value="{{$value->goods_delivery_note_code}}" placeholder="Mã hàng hóa" >
                                                                                                             <label for="text" class="error"></label>
                                                                                                         </div>
                                                                                                     </div>
