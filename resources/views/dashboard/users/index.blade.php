@@ -226,68 +226,75 @@
                                                                                             <div class="form-body">
                                                                                                 <div class="row">
                                                                                                     <div class="col-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <label for="first-name-vertical">Mã nhân viên</label>
-                                                                                                                <input  style="pointer-events:none;"type="text" class="form-control" name="user_code" value="{{$user->user_code}}" placeholder="Mã nhân viên">
-                                                                                                                    <label for="text" class="error"></label>
-                                                                                                            </div>
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="first-name-vertical">Mã nhân viên</label>
+                                                                                                            <input  style="pointer-events:none;"type="text" class="form-control" name="user_code" value="{{$user->user_code}}" placeholder="Mã nhân viên">
+                                                                                                            <label for="text" class="error"></label>
                                                                                                         </div>
-                                                                                                        <div class="col-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <label for="first-name-vertical">Họ và tên</label>
-                                                                                                                <input type="text" class="form-control" name="name" value="{{$user->name}}" placeholder="Họ và tên">
-                                                                                                                    <label for="text" class="error"></label>
-                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="first-name-vertical">Họ và tên</label>
+                                                                                                            <input type="text" class="form-control" name="name" value="{{$user->name}}" placeholder="Họ và tên">
+                                                                                                                <label for="text" class="error"></label>
                                                                                                         </div>
-                                                                                                        <div class="col-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <label for="email-id-vertical">Số CMND</label>
-                                                                                                                <input type="number" id="id_card" class="form-control" name="id_card" value="{{$user->id_card}}" placeholder="Số CMND">
-                                                                                                                    <label for="text" class="error"></label>
-                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="first-name-vertical">Email</label>
+                                                                                                            <input  style="pointer-events:none;"type="text" class="form-control" name="user_code" value="{{$user->email}}" placeholder="Email">
+                                                                                                            <label for="text" class="error"></label>
                                                                                                         </div>
-                                                                                                        <div class="col-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <label for="password-vertical">Vị trí làm việc</label>
-                                                                                                                <fieldset class="form-group">
-                                                                                                                    <select class="form-select" name="role_id">
-                                                                                                                        <option value="">---Chọn vị trí làm việc---</option>   
-                                                                                                                        <option value="0"{{$user->role_id == 0 ? "selected='seleted'" : ""}}>Quản lý</option>
-                                                                                                                        <option value="1" {{$user->role_id == 1 ? "selected='seleted'" : ""}}>Thu ngân</option>
-                                                                                                                        <option value="2" {{$user->role_id == 2 ? "selected='seleted'" : ""}}>Pha chế</option>
-                                                                                                                    </select>
-                                                                                                                    <label for="text" class="error"></label>
-                                                                                                                </fieldset>
-                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="email-id-vertical">Số CMND</label>
+                                                                                                            <input type="number" id="id_card" class="form-control" name="id_card" value="{{$user->id_card}}" placeholder="Số CMND">
+                                                                                                                <label for="text" class="error"></label>
                                                                                                         </div>
-                                                                                                        <div class="col-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <label for="password-vertical">Giới tính</label>
-                                                                                                                <fieldset class="form-group">
-                                                                                                                    <select class="form-select" name="gender">
-                                                                                                                        <option value="">---Chọn Giới tính---</option>   
-                                                                                                                        <option value="0" {{$user->gender == 0 ? "selected='seleted'" : ""}}>Nam</option>
-                                                                                                                        <option value="1" {{$user->gender == 1 ? "selected='seleted'" : ""}}>Nữ</option>
-                                                                                                                    </select>
-                                                                                                                    <label for="text" class="error"></label>
-                                                                                                                </fieldset>
-                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="password-vertical">Vị trí làm việc</label>
+                                                                                                            <fieldset class="form-group">
+                                                                                                                <select class="form-select" name="role_id">
+                                                                                                                    <option value="">---Chọn vị trí làm việc---</option>   
+                                                                                                                    <option value="0"{{$user->role_id == 0 ? "selected='seleted'" : ""}}>Quản lý</option>
+                                                                                                                    <option value="1" {{$user->role_id == 1 ? "selected='seleted'" : ""}}>Thu ngân</option>
+                                                                                                                    <option value="2" {{$user->role_id == 2 ? "selected='seleted'" : ""}}>Pha chế</option>
+                                                                                                                </select>
+                                                                                                                <label for="text" class="error"></label>
+                                                                                                            </fieldset>
                                                                                                         </div>
-                                                                                                        <div class="col-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <label for="password-vertical">Trạng thái</label>
-                                                                                                                <fieldset class="form-group">
-                                                                                                                    <select class="form-select" name="status">
-                                                                                                                        <option value="">---Chọn trạng thái---</option>   
-                                                                                                                        <option value="0" {{$user->status == 0 ? "selected='seleted'" : ""}}>Đang làm việc</option>
-                                                                                                                        <option value="1" {{$user->status == 1 ? "selected='seleted'" : ""}}>Đã nghỉ việc</option>
-                                                                                                                    </select>
-                                                                                                                    <label for="text" class="error"></label>
-                                                                                                                </fieldset>
-                                                                                                            </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="password-vertical">Giới tính</label>
+                                                                                                            <fieldset class="form-group">
+                                                                                                                <select class="form-select" name="gender">
+                                                                                                                    <option value="">---Chọn Giới tính---</option>   
+                                                                                                                    <option value="0" {{$user->gender == 0 ? "selected='seleted'" : ""}}>Nam</option>
+                                                                                                                    <option value="1" {{$user->gender == 1 ? "selected='seleted'" : ""}}>Nữ</option>
+                                                                                                                </select>
+                                                                                                                <label for="text" class="error"></label>
+                                                                                                            </fieldset>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="col-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <label for="password-vertical">Trạng thái</label>
+                                                                                                            <fieldset class="form-group">
+                                                                                                                <select class="form-select" name="status">
+                                                                                                                    <option value="">---Chọn trạng thái---</option>   
+                                                                                                                    <option value="0" {{$user->status == 0 ? "selected='seleted'" : ""}}>Đang làm việc</option>
+                                                                                                                    <option value="1" {{$user->status == 1 ? "selected='seleted'" : ""}}>Đã nghỉ việc</option>
+                                                                                                                </select>
+                                                                                                                <label for="text" class="error"></label>
+                                                                                                            </fieldset>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
+                                                                                            </div>
                                                                                                 <div class="clearfix" style="padding-top: 15px;">
                                                                                                     <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
                                                                                                     <i class="bx bx-x d-block d-sm-none"></i>

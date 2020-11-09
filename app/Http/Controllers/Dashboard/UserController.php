@@ -23,7 +23,7 @@ class UserController extends Controller
     public function createUser(Request $request) {
     	$data = $request->except('_token');
     	foreach ($data as $key => &$value) {
-    		$data['user_code'] = Str::slug($request->user_code);
+    		$data['user_code'] = strtoupper(Str::slug($request->user_code));
     	}
 
     	$messages = [
@@ -63,7 +63,7 @@ class UserController extends Controller
     		return redirect()->back();
     	} else {
     		$user = new User();
-    		$user->user_code = Str::slug($request->user_code);
+    		$user->user_code = strtoupper(Str::slug($request->user_code));
     		$user->name = $request->name;
     		$user->email  = $request->email;
     		$user->id_card = $request->id_card;

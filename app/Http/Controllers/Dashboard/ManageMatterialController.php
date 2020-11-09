@@ -23,7 +23,7 @@ class ManageMatterialController extends Controller
     public function createMatterial(Request $request) {
     	$data = $request->except('_token');
     	foreach ($data as $key => $value) {
-    		$data['matterials_code'] = Str::slug($request->matterials_code);
+    		$data['matterials_code'] = strtoupper(Str::slug($request->matterials_code));
     	}
 
     	$messages = [
@@ -49,7 +49,7 @@ class ManageMatterialController extends Controller
     		return redirect()->back();
     	} else {
     		$matterial = new MatterialsModel();
-    		$matterial->matterials_code = Str::slug($request->matterials_code);
+    		$matterial->matterials_code = strtoupper(Str::slug($request->matterials_code));
     		$matterial->name = $request->name;
     		$matterial->unit = $request->unit;
     		$matterial->save();

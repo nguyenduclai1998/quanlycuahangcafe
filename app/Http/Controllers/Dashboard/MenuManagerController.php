@@ -21,7 +21,7 @@ class MenuManagerController extends Controller
     public function createMenu(Request $request) {
     	$data = $request->except('_token');
     	foreach ($data as $key => &$value) {
-            $data['drinks_code'] = Str::slug($request->drinks_code) ;
+            $data['drinks_code'] = strtoupper(Str::slug($request->drinks_code)) ;
         }
     	$message = [
     		"drinks_code.unique" => "Drink Code đã tồn tại",
@@ -53,7 +53,7 @@ class MenuManagerController extends Controller
     		return redirect()->back();
     	} else {
     		$menu = new MenuModel();
-    		$menu->drinks_code = Str::slug($request->drinks_code);
+    		$menu->drinks_code = strtoupper(Str::slug($request->drinks_code));
     		$menu->name = $request->name;
     		$menu->price = $request->price;
     		$menu->unit = $request->unit;

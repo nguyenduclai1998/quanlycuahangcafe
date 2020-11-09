@@ -31,10 +31,10 @@ class GoodDeliveryNoteController extends Controller
             ->get();
             $goodDeliveryNoteDetails[$value['id']][] = $goodDeliveryNoteDetail;
         }
-        // dd($goodDeliveryNoteDetails);
+
     	$supplier = SupplierModel::get();
     	$matterial = MatterialsModel::get();
-        // dd($matterial);
+
     	$viewData = [
     		'goodDeliveryNote' => $goodDeliveryNote,
     		'supplier' => $supplier,
@@ -50,7 +50,7 @@ class GoodDeliveryNoteController extends Controller
 
         $array = array_combine($data['matterials_id'], $data['amount']);
     	foreach ($data as $key => $value) {
-    		$data['goods_delivery_note_code'] = Str::slug($request->goods_delivery_note_code);
+    		$data['goods_delivery_note_code'] = strtoupper(Str::slug($request->goods_delivery_note_code));
     	}
     	
     	$messages = [
@@ -83,7 +83,7 @@ class GoodDeliveryNoteController extends Controller
     		return redirect()->back();
     	} else {
     		$goodDeliveryNote = new GoodsDeliveryNoteModel();
-    		$goodDeliveryNote->goods_delivery_note_code = Str::slug($request->goods_delivery_note_code);
+    		$goodDeliveryNote->goods_delivery_note_code = strtoupper(Str::slug($request->goods_delivery_note_code));
     		$goodDeliveryNote->supplier_id = $request->supplier_id;
     		$goodDeliveryNote->deliver = $request->deliver;
     		$goodDeliveryNote->user_id = Auth::id();
