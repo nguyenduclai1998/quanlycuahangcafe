@@ -20,7 +20,7 @@ class CreateGoodsDeliveryNoteTable extends Migration
             $table->bigInteger('supplier_id')->unsigned();
             $table->timestamp('issue_date',0);
             $table->string('deliver');
-            $table->bigInteger('deliver_phone_number');
+            $table->char('deliver_phone_number');
             $table->timestamps();
         });
     }

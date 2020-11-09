@@ -23,7 +23,7 @@ class ManageSuppierController extends Controller
     public function createSupplier(Request $request) {
     	$data = $request->except('_token');
     	foreach ($data as $key => $value) {
-    		$data['supplier_code'] = Str::slug($request->supplier_code);
+    		$data['supplier_code'] = strtoupper(Str::slug($request->supplier_code));
     	}
 
     	$messages = [
@@ -47,7 +47,7 @@ class ManageSuppierController extends Controller
     		return redirect()->back();
     	} else {
     		$supplier = new SupplierModel();
-    		$supplier->supplier_code = Str::slug($request->supplier_code);
+    		$supplier->supplier_code = strtoupper(Str::slug($request->supplier_code));
     		$supplier->name = $request->name;
     		$supplier->save();
     		toastr()->success("Thêm mới thành công");

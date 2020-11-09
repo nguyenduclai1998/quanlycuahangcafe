@@ -22,7 +22,7 @@ class TableManagerController extends Controller
     	$data = $request->except('_token');
 
     	foreach ($data as $key => &$value) {
-            $data['table_code'] = Str::slug($request->table_code) ;
+            $data['table_code'] = strtoupper(Str::slug($request->table_code)) ;
         }
     	$message = [
     		"table_code.unique" => "Table Code đã tồn tại",
@@ -50,7 +50,7 @@ class TableManagerController extends Controller
     		return redirect()->back();
     	} else {
     		$table = new TableModel();
-    		$table->table_code = Str::slug($request->table_code);
+    		$table->table_code = strtoupper(Str::slug($request->table_code));
     		$table->number = $request->number;
     		$table->status = $request->status;
     		$table->save();
