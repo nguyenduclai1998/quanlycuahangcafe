@@ -37,7 +37,7 @@
                                 <tr>
                                     <td>{{$value->bill_code}}</td>
                                     <td>{{$value->name}}</td>
-                                    <td>{{$value->number}}</td>
+                                    <td>Bàn {{$value->number}}</td>
                                     <td>{{$value->bill_date}}</td>
                                     @if($value->status == 0)
                                         <td>
