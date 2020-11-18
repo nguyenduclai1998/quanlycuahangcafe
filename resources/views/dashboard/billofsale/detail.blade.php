@@ -6,13 +6,13 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Chi tiết phiếu nhập kho: {{$bill->bill_code}}</h3>
+                <h3>Chi tiết hóa đơn bán hàng: {{$bill->bill_code}}</h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Quản lý hàng hóa nhập kho</li>
+                        <li class="breadcrumb-item active" aria-current="page">Quản lý hóa đơn bán hàng</li>
                     </ol>
                 </nav>
             </div>
