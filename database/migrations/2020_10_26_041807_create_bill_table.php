@@ -19,8 +19,9 @@ class CreateBillTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('table_id')->unsigned();
             $table->timestamp('bill_date',0);
-            $table->string('bartender');
+            $table->string('bartender')->nullable();
             $table->bigInteger('status')->default(0);
+            $table->bigInteger('number')->nullable();
             $table->timestamps();
         });
     }

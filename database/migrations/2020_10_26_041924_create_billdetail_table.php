@@ -16,8 +16,8 @@ class CreateBilldetailTable extends Migration
         Schema::create('billdetail', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('bill_id')->unsigned();
-            $table->bigInteger('menu_id')->unsigned();
-            $table->bigInteger('amount');
+            $table->bigInteger('menu_id')->unsigned()->nullable();
+            $table->bigInteger('amount')->nullable();
             $table->timestamps();
         });
     }
