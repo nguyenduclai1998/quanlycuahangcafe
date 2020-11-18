@@ -34,12 +34,13 @@ class GoodDeliveryNoteController extends Controller
 
     	$supplier = SupplierModel::get();
     	$matterial = MatterialsModel::get();
+        $title = "Quản lý phiếu nhập kho";
 
     	$viewData = [
     		'goodDeliveryNote' => $goodDeliveryNote,
     		'supplier' => $supplier,
     		'matterial' => $matterial,
-            'goodDeliveryNoteDetails' => $goodDeliveryNoteDetails
+            'goodDeliveryNoteDetails' => $goodDeliveryNoteDetails,
     	];
 
     	return view('dashboard.gooddeliverynote.index', $viewData);
@@ -111,7 +112,6 @@ class GoodDeliveryNoteController extends Controller
             $data['goods_delivery_note_code'] = Str::slug($request->goods_delivery_note_code);
         }
         $array = array_filter($array);
-        // dd($array);
     	$messages = [
     		'supplier_id.required' => "Nhà cung cấp không được để trống",
     		'deliver.required' => "Nhân viên giao hàng không được để trống",

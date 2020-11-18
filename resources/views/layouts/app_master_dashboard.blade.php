@@ -130,7 +130,7 @@
                                     <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
                                     <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                    <a class="dropdown-item" href="{{route('get.logout')}}"><i data-feather="log-out"></i> Đăng xuất</a>
                                 </div>
                             </li>
                         </ul>

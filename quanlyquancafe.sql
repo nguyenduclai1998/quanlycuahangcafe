@@ -28,13 +28,14 @@ CREATE TABLE `bill` (
   `user_id` bigint(20) unsigned NOT NULL,
   `table_id` bigint(20) unsigned NOT NULL,
   `bill_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `bartender` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bartender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` bigint(20) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `number` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `bill_bill_code_unique` (`bill_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +44,7 @@ CREATE TABLE `bill` (
 
 LOCK TABLES `bill` WRITE;
 /*!40000 ALTER TABLE `bill` DISABLE KEYS */;
+INSERT INTO `bill` VALUES (12,'HD-00003',1,4,'2020-11-18 15:05:43',NULL,0,'2020-11-18 15:05:43','2020-11-18 15:05:43',3);
 /*!40000 ALTER TABLE `bill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,12 +58,12 @@ DROP TABLE IF EXISTS `billdetail`;
 CREATE TABLE `billdetail` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `bill_id` bigint(20) unsigned NOT NULL,
-  `menu_id` bigint(20) unsigned NOT NULL,
-  `amount` bigint(20) NOT NULL,
+  `menu_id` bigint(20) unsigned DEFAULT NULL,
+  `amount` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +72,7 @@ CREATE TABLE `billdetail` (
 
 LOCK TABLES `billdetail` WRITE;
 /*!40000 ALTER TABLE `billdetail` DISABLE KEYS */;
+INSERT INTO `billdetail` VALUES (7,11,14,1,'2020-11-18 16:13:10','2020-11-18 16:13:10'),(49,12,12,2,'2020-11-18 17:10:17','2020-11-18 17:10:17'),(50,12,13,1,'2020-11-18 17:10:17','2020-11-18 17:10:17');
 /*!40000 ALTER TABLE `billdetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +131,7 @@ CREATE TABLE `goods_delivery_note` (
 
 LOCK TABLES `goods_delivery_note` WRITE;
 /*!40000 ALTER TABLE `goods_delivery_note` DISABLE KEYS */;
-INSERT INTO `goods_delivery_note` VALUES (24,'phieu-2',1,4,'2020-11-06 15:27:39','Nguyễn Văn B','387588688','2020-11-04 14:12:00','2020-11-06 15:27:39'),(25,'phieu-3',1,5,'2020-11-06 02:43:20','Nguyễn Văn c','232','2020-11-06 02:43:20','2020-11-06 02:43:20'),(26,'PHIEU-1',1,4,'2020-11-09 09:46:07','Nguyễn Văn BC','0387588688','2020-11-09 09:46:07','2020-11-09 09:46:07');
+INSERT INTO `goods_delivery_note` VALUES (24,'phieu-2',1,4,'2020-11-09 09:56:07','Nguyễn Văn B','0387588688','2020-11-04 14:12:00','2020-11-09 09:56:07'),(26,'PHIEU-1',1,4,'2020-11-09 09:46:07','Nguyễn Văn BC','0387588688','2020-11-09 09:46:07','2020-11-09 09:46:07');
 /*!40000 ALTER TABLE `goods_delivery_note` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +150,7 @@ CREATE TABLE `goodsdeliverynotedetail` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +159,7 @@ CREATE TABLE `goodsdeliverynotedetail` (
 
 LOCK TABLES `goodsdeliverynotedetail` WRITE;
 /*!40000 ALTER TABLE `goodsdeliverynotedetail` DISABLE KEYS */;
-INSERT INTO `goodsdeliverynotedetail` VALUES (27,2,25,1,'2020-11-06 02:43:20','2020-11-06 02:43:20'),(28,3,25,2,'2020-11-06 02:43:20','2020-11-06 02:43:20'),(29,4,25,3,'2020-11-06 02:43:20','2020-11-06 02:43:20'),(30,5,25,4,'2020-11-06 02:43:20','2020-11-06 02:43:20'),(52,2,24,12,'2020-11-06 15:27:39','2020-11-06 15:27:39'),(53,3,24,12345,'2020-11-06 15:27:39','2020-11-06 15:27:39'),(54,4,24,12,'2020-11-06 15:27:39','2020-11-06 15:27:39'),(55,5,24,156,'2020-11-06 15:27:39','2020-11-06 15:27:39'),(56,3,26,1,'2020-11-09 09:46:07','2020-11-09 09:46:07');
+INSERT INTO `goodsdeliverynotedetail` VALUES (56,3,26,1,'2020-11-09 09:46:07','2020-11-09 09:46:07'),(57,2,24,12,'2020-11-09 09:56:07','2020-11-09 09:56:07'),(58,3,24,12345,'2020-11-09 09:56:07','2020-11-09 09:56:07'),(59,4,24,12,'2020-11-09 09:56:07','2020-11-09 09:56:07'),(60,5,24,156,'2020-11-09 09:56:07','2020-11-09 09:56:07');
 /*!40000 ALTER TABLE `goodsdeliverynotedetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +179,7 @@ CREATE TABLE `matterials` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `matterials_matterials_code_unique` (`matterials_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +188,7 @@ CREATE TABLE `matterials` (
 
 LOCK TABLES `matterials` WRITE;
 /*!40000 ALTER TABLE `matterials` DISABLE KEYS */;
-INSERT INTO `matterials` VALUES (2,'chan-chau-den','Chân châu đen','kg','2020-10-28 03:26:22','2020-10-28 03:26:22'),(3,'chan-chau-trang','Chân châu trắng','Kg','2020-10-29 14:53:15','2020-10-29 14:53:15'),(4,'xoi-thit','Xoi thit','Bat','2020-10-30 13:22:17','2020-10-30 13:22:17'),(5,'sua','Sữa','Hộp','2020-11-03 14:05:25','2020-11-03 14:05:25'),(6,'test','tester','test','2020-11-06 15:03:27','2020-11-06 15:03:27');
+INSERT INTO `matterials` VALUES (2,'chan-chau-den','Chân châu đen','kg','2020-10-28 03:26:22','2020-10-28 03:26:22'),(3,'chan-chau-trang','Chân châu trắng','Kg','2020-10-29 14:53:15','2020-10-29 14:53:15'),(4,'xoi-thit','Xoi thit','Bat','2020-10-30 13:22:17','2020-10-30 13:22:17'),(5,'sua','Sữa','Hộp','2020-11-03 14:05:25','2020-11-03 14:05:25'),(7,'COC','Coc','Cốc','2020-11-18 03:57:24','2020-11-18 03:57:24');
 /*!40000 ALTER TABLE `matterials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +210,7 @@ CREATE TABLE `menu` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `menu_drinks_code_unique` (`drinks_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +219,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (12,'ca-phe-den-da','cà phê đen đá',345345,'Cốc',0,'2020-10-27 05:45:02','2020-10-30 03:04:39'),(13,'tra-chanh-truyen-thong-EkD','trà chanh truyền thống',10000,'Cốc',1,'2020-10-27 07:29:43','2020-10-27 08:14:59'),(14,'tra-sua-19','Trà sữa kiwi',15000,'Cốc',0,'2020-10-27 07:31:26','2020-10-27 07:31:26');
+INSERT INTO `menu` VALUES (12,'ca-phe-den-da','Cà phê đen đá',10000,'Cốc',0,'2020-10-27 05:45:02','2020-11-18 03:39:52'),(13,'tra-chanh-truyen-thong-EkD','Trà chanh truyền thống',10000,'Cốc',0,'2020-10-27 07:29:43','2020-11-18 01:49:22'),(14,'tra-sua-19','Trà sữa kiwi',15000,'Cốc',0,'2020-10-27 07:31:26','2020-10-27 07:31:26'),(15,'SUA-CHUA-DAU','Sữa chua dâu',15000,'cốc',0,'2020-11-11 09:06:27','2020-11-18 01:49:32');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,7 +387,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Dev Quèn','devquen@gmail.com','6JACmwuHyR',1234567890,0,0,NULL,'$2y$10$EANLZGHJuyFLvUvURDTBpeDBTkfH8lTIShiavpptG1GWZ039NA/ZW',0,NULL,NULL,'2020-10-27 20:23:09'),(2,'Lai Nguyễn Đức','kenchivas1998@gmail.com','devquen-at-gmailcom',123455677677,1,0,NULL,'$2y$10$cuAXUBDoI7BzYfSIFre5jukm/kpeOYkp09WQzZKhZLdnv.9Fl.NDS',1,NULL,'2020-10-27 10:29:30','2020-10-27 20:14:46'),(3,'User test','test@gmail.com','tester',12345678,0,1,NULL,'$2y$10$T5SZ1zc07jr4QxqbCxD3xen4HfJ1BYOBpr2G/1ZoWNGfDVFqDPWSC',0,NULL,'2020-10-27 20:21:44','2020-10-27 20:22:33');
+INSERT INTO `users` VALUES (1,'Dev quèn','devquen@gmail.com','6JACmwuHyR',1234567890,0,0,NULL,'$2y$10$EANLZGHJuyFLvUvURDTBpeDBTkfH8lTIShiavpptG1GWZ039NA/ZW',0,NULL,NULL,'2020-11-09 10:36:37'),(2,'Trần Việt Tiến','kenchivas1998@gmail.com','devquen-at-gmailcom',123455677677,1,0,NULL,'$2y$10$cuAXUBDoI7BzYfSIFre5jukm/kpeOYkp09WQzZKhZLdnv.9Fl.NDS',1,NULL,'2020-10-27 10:29:30','2020-11-09 09:56:55'),(3,'User test','test@gmail.com','tester',12345678,0,1,NULL,'$2y$10$T5SZ1zc07jr4QxqbCxD3xen4HfJ1BYOBpr2G/1ZoWNGfDVFqDPWSC',0,NULL,'2020-10-27 20:21:44','2020-10-27 20:22:33');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -397,4 +400,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-09 16:48:48
+-- Dump completed on 2020-11-19  0:11:37

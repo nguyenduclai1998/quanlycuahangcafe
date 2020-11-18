@@ -24,4 +24,9 @@ class LoginController extends Controller
     	return redirect()->back()->with('errors', 'Email hoặc mật khẩu không đúng.');;
     	toastr()->error('Email hoặc mật khẩu không đúng.');
     }
+
+    public function getLogout() {
+        Auth::logout();
+        return redirect()->to('/login');
+    }
 }

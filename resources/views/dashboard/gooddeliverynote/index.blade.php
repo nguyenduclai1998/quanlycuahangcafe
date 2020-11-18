@@ -444,7 +444,7 @@
 
         $('body').on('click',' [data-action=addField1]', function(){
             $('[data-content=templateItem4]').append(template1);
-``
+
             $(this).attr('data-action','minusField1');
         });
 

@@ -14,6 +14,7 @@ class BillModel extends Model
     	'table_id',
     	'bill_date',
     	'bartender',
-    	'status'
+    	'status',
+        'number'
     ];
 }
