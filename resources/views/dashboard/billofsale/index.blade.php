@@ -63,14 +63,16 @@
                                             <span>Xem chi tiết</span>
                                         </a> <br>
                                         @if(Auth::user()->role_id == 1)
-                                        <a href="{{route('edit.billofsale', $value->id)}}" class='sidebar-link'>
-                                            <i data-feather="edit" width="20"></i> 
-                                            <span>Sửa</span>
-                                        </a> <br>
-                                        <a href="{{route('delete.billofsale', $value->id)}}" class='sidebar-link'>
-                                            <i data-feather="trash" width="20"></i> 
-                                            <span>Xóa</span>
-                                        </a>
+                                        @if($value->status == 0)
+                                            <a href="{{route('edit.billofsale', $value->id)}}" class='sidebar-link'>
+                                                <i data-feather="edit" width="20"></i> 
+                                                <span>Sửa</span>
+                                            </a> <br>
+                                            <a href="{{route('delete.billofsale', $value->id)}}" class='sidebar-link'>
+                                                <i data-feather="trash" width="20"></i> 
+                                                <span>Xóa</span>
+                                            </a>
+                                        @endif
                                         @endif
                                     </td>
                                     @endif
