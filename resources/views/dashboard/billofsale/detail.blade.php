@@ -19,7 +19,7 @@
         </div>
 
     </div>
-    <button class="btn btn-primary print" id="printThis">In hóa đơn</button>
+    <button class="btn btn-primary print" id="printThis" style="margin-top: 20px">In hóa đơn</button>
     <div class="container">
         <div class="row printThis" style="padding: 25px 0px">
             <h3 class="text-center" style="font-weight: 900;">QUẢN LÝ CỬA HÀNG CAFE</h3>
