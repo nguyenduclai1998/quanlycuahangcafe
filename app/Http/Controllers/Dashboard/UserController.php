@@ -35,6 +35,7 @@ class UserController extends Controller
     		'status.required' => "Trạng thái không được để trống.",
     		'name.required' => "Họ tên không được để trống.",
     		'id_card.required' => "Số CMND không được để trống.",
+            'id_card.unique' => "Số CMND đã tồn tại.",
     		'gender.required' => "Giới tính không được để trống.",
     		'role_id.required' => "Vị trí làm việc không được để trống.",
     		'password.required' => "Mật khẩu không được để trống.",
@@ -46,7 +47,7 @@ class UserController extends Controller
     		'email' => 'required|email|unique:users',
     		'status' => 'required',
     		'name' => 'required',
-    		'id_card' => 'required',
+    		'id_card' => 'required|unique:users',
     		'gender' => 'required',
     		'role_id' => 'required',
     		'password' => 'required|min:8'
@@ -62,18 +63,23 @@ class UserController extends Controller
 	        }
     		return redirect()->back();
     	} else {
-    		$user = new User();
-    		$user->user_code = strtoupper(Str::slug($request->user_code));
-    		$user->name = $request->name;
-    		$user->email  = $request->email;
-    		$user->id_card = $request->id_card;
-    		$user->password = Hash::make($request->password);
-    		$user->gender = $request->gender;
-    		$user->role_id = $request->role_id;
-    		$user->status = $request->status;
-    		$user->save();
-    		toastr()->success("Thêm mới thành công.");
-    		return redirect()->back();
+            try {
+                $user = new User();
+                $user->user_code = strtoupper(Str::slug($request->user_code));
+                $user->name = $request->name;
+                $user->email  = $request->email;
+                $user->id_card = $request->id_card;
+                $user->password = Hash::make($request->password);
+                $user->gender = $request->gender;
+                $user->role_id = $request->role_id;
+                $user->status = $request->status;
+                $user->save();
+                toastr()->success("Thêm mới thành công.");
+                return redirect()->back();
+            } catch (Exception $e) {
+                toastr()->error("Đã xảy ra lỗi vui lòng thử lại.");
+                return redirect()->back();
+            }
     	}
     }
 

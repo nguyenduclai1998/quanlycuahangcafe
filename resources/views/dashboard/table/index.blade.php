@@ -22,10 +22,12 @@
             <div class="card-content">
                 <div class="card-body" style="padding-left: 0px">
                     <!-- button trigger for  Vertically Centered modal -->
+                    @if(Auth::user()->role_id == 0)
                     <button type="button" class="btn btn-primary block" data-toggle="modal"
                         data-target="#exampleModalCenter">
                     Thêm mới 
                     </button>
+                    @endif
                     <!-- Vertically Centered modal Modal -->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -111,7 +113,9 @@
                             <th>Mã bàn</th>
                             <th>Số bàn</th>
                             <th>Trạng thái</th>
+                            @if(Auth::user()->role_id == 0)
                             <th>Thao tác</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -129,6 +133,7 @@
                                         <span class="badge bg-danger">Bàn đã phục vụ</span>
                                     </td>
                                 @endif
+                                @if(Auth::user()->role_id == 0)
                                 <td class="active">
                                     <div class="card" style="box-shadow:none; background-color:unset; margin-bottom: 0;">
                                         <div class="card-content">
@@ -212,6 +217,7 @@
                                         <span>Xóa</span>
                                     </a>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

@@ -33,7 +33,7 @@
                         <ul class="menu">
                             <li class='sidebar-title'>Main Menu</li>
                             <li class="sidebar-item active ">
-                                <a href="index.html" class='sidebar-link'>
+                                <a href="{{route('home')}}" class='sidebar-link'>
                                 <i data-feather="grid" width="20"></i> 
                                 <span>Dashboard</span>
                                 </a>
@@ -46,11 +46,10 @@
                                 </a>
                                 
                                 <ul class="submenu ">
-                                    
                                     <li>
                                         <a href="{{ route('get.billofsale') }}">Lập hóa đơn bán hàng</a>
                                     </li>
-                                    
+
                                     <li>
                                         <a href="{{route('get.servedinks')}}">Phục vụ đồ uống</a>
                                     </li>
@@ -65,11 +64,10 @@
                                 </a>
                                 
                                 <ul class="submenu ">
-                                    
                                     <li>
                                         <a href="{{ route('get.goodDeliveryNote') }}">Quản lý phiếu nhập kho</a>
                                     </li>
-                                    
+
                                     <li>
                                         <a href="{{ route('get.matterial') }}">Quản lý danh mục hàng hóa</a>
                                     </li>

@@ -17,7 +17,9 @@
         </div>
     </div>
     <section class="section">
+        @if(Auth::user()->role_id == 1)
         <a type="button" class="btn btn-primary block" href="{{route('create.billofsale')}}" style="margin-bottom: 55px; margin-top: 25px;"> Thêm mới</a>
+        @endif
         @if(isset($bill))
             <div class="card">
                 <div class="card-body">
@@ -29,7 +31,9 @@
                                 <th>Bàn</th>
                                 <th>Ngày lập hóa đơn</th>
                                 <th>Trạng thái</th>
+                                @if(Auth::user()->role_id == 1)
                                 <th>Thao tác</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -52,11 +56,13 @@
                                             <span class="badge bg-primary">Đã phục vụ</span>
                                         </td>
                                     @endif
+                                    @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 0)
                                     <td>
                                         <a href="{{route('getDetail.billofsale', $value->id)}}" class='sidebar-link'>
                                             <i data-feather="delete" width="20"></i> 
                                             <span>Xem chi tiết</span>
                                         </a> <br>
+                                        @if(Auth::user()->role_id == 1)
                                         <a href="{{route('edit.billofsale', $value->id)}}" class='sidebar-link'>
                                             <i data-feather="edit" width="20"></i> 
                                             <span>Sửa</span>
@@ -65,7 +71,9 @@
                                             <i data-feather="trash" width="20"></i> 
                                             <span>Xóa</span>
                                         </a>
+                                        @endif
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

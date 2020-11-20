@@ -29,7 +29,9 @@
                                 <th>Bàn</th>
                                 <th>Ngày lập hóa đơn</th>
                                 <th>Trạng thái</th>
+                                @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <th>Thao tác</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -53,17 +55,30 @@
                                         </td>
                                     @endif
                                     <td>
-                                        @if($value->status == 0)
-                                            <a href="{{route('updateStatus.servedinks', [1, $value->id])}}" class='badge bg-primary'>
-                                                <span>Thanh toán</span>
-                                            </a>
-                                        @elseif($value->status == 1)
-                                            <a href="{{route('updateStatus.servedinks', [2, $value->id])}}" class='badge bg-primary'>
-                                                <span>Đã thanh toán</span>
-                                            </a>
-                                        @elseif($value->status == 2)
-                                                <span class='badge bg-primary'>Đã phục vụ</span>
-                                            </a>
+                                        @if(Auth::user()->role_id == 1)
+                                            @if($value->status == 0)
+                                                <a href="{{route('updateStatus.servedinks', [1, $value->id])}}" class='badge bg-primary'>
+                                                    <span>Thanh toán</span>
+                                                </a>
+                                            @elseif($value->status == 1)
+                                                    <span class='badge bg-primary'>Đã thanh toán</span>
+                                                </a>
+                                            @elseif($value->status == 2)
+                                                    <span class='badge bg-primary'>Đã phục vụ</span>
+                                                </a>
+                                            @endif
+                                        @elseif(Auth::user()->role_id == 2)
+                                            @if($value->status == 0)
+                                                    <span class='badge bg-primary'>Thanh toán</span>
+                                                </a>
+                                            @elseif($value->status == 1)
+                                                <a href="{{route('updateStatus.servedinks', [2, $value->id])}}" class='badge bg-primary'>
+                                                    <span>Đã thanh toán</span>
+                                                </a>
+                                            @elseif($value->status == 2)
+                                                    <span class='badge bg-primary'>Đã phục vụ</span>
+                                                </a>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>

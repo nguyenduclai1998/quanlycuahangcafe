@@ -19,7 +19,9 @@
         </div>
 
     </div>
+    @if(Auth::user()->role_id == 1)
     <button class="btn btn-primary print" id="printThis" style="margin-top: 20px">In hóa đơn</button>
+    @endif
     <div class="container">
         <div class="row printThis" style="padding: 25px 0px">
             <h3 class="text-center" style="font-weight: 900;">QUẢN LÝ CỬA HÀNG CAFE</h3>
