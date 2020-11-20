@@ -27,7 +27,8 @@ class ServeDinksController extends Controller
     	$bill = new BillModel();
 	    $bill = BillModel::find($request->id);
     	$bill->status = $request->status;
-    	$bill->bartender = $request->status == 2 ? \Auth::user()->name : '';
+    	$bill->bartender = $request->status == 2 ? \Auth::user()->name : null;
+    	// dd($bill);
     	$bill->update();
     	toastr()->success("Cập nhật thành công.");
     	if($request->status == 1)  {

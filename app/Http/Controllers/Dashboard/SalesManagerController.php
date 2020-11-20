@@ -187,6 +187,7 @@ class SalesManagerController extends Controller
 		$bill = BillModel::select('bill.id as billId', 'bill.bill_code', 'bill.bill_date', 'bill.bartender', 'bill.status', 'users.name', 'bill.user_id', 'bill.table_id', 'table.number')
 						  ->join('users', 'bill.user_id', '=', 'users.id')
 						  ->join('table', 'bill.table_id', '=', 'table.id')
+                          ->where('bill.id', $id)
 						  ->first();
 		$billDetail = BillDetailModel::select('billdetail.menu_id','billdetail.amount', 'menu.name', 'menu.price')
 									 ->join('menu', 'billdetail.menu_id', '=', 'menu.id')
