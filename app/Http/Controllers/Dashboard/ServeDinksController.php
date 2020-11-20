@@ -15,6 +15,8 @@ class ServeDinksController extends Controller
     	$bill = BillModel::select('bill.id', 'bill.bill_code', 'bill.bill_date', 'bill.status', 'users.name', 'table.number')
     		               ->join('users', 'bill.user_id', '=', 'users.id')
     		               ->join('table', 'bill.table_id', '=', 'table.id')
+                           ->where('bill.status', 1)
+                           ->orWhere('bill.status', 2)
     		               ->get();
     	$viewData = [
     		'bill' => $bill

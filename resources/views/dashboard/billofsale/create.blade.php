@@ -171,7 +171,7 @@
                                                 <i class="bx bx-x d-block d-sm-none"></i>
                                                 <span class="d-none d-sm-block">Hủy</span>
                                                 </button>
-                                                <button type="submit" class="btn btn-primary float-right">Thêm mới</button>
+                                                <button type="submit" class="btn btn-primary float-right">Thanh toán</button>
                                             </div>
                                         </form>
                                     </div>

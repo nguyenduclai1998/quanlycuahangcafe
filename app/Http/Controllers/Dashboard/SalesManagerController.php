@@ -71,6 +71,7 @@ class SalesManagerController extends Controller
 		    		$bill->bill_code = "HD-".str_pad($number, 5, "0", STR_PAD_LEFT);
 		    		$bill->user_id = Auth::id();
 		    		$bill->table_id = $request->table_id;
+                    $bill->status = 1;
 		    		$bill->bill_date = Carbon::now()->toDateTimeString();
 		    		$bill->number = BillModel::max('number') + 1;
 		    		$bill->save();
@@ -84,7 +85,7 @@ class SalesManagerController extends Controller
 		            }
 		    		
 		    		toastr()->success("Thêm mới thành công.");
-		    		return redirect()->back();
+		    		return redirect()->route('getDetail.billofsale', ['id' => $bill->id]);
 	    		} catch (\Exception $e) {
 	    			toastr()->error("Đã xảy ra lỗi vui lòng thử lại.");
 	    			return redirect()->back();
@@ -160,7 +161,7 @@ class SalesManagerController extends Controller
 	            }
 	    		
 	    		toastr()->success("Cập nhật thành công.");
-	    		return redirect()->back();
+	    		return redirect()->route('getDetail.billofsale', ['id' => $bill->id]);
     		} catch (\Exception $e) {
     			toastr()->error("Đã xảy ra lỗi vui lòng thử lại.");
     			return redirect()->back();

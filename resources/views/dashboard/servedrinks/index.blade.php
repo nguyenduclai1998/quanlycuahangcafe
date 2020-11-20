@@ -55,7 +55,7 @@
                                         </td>
                                     @endif
                                     <td>
-                                        @if(Auth::user()->role_id == 1)
+                                        {{-- @if(Auth::user()->role_id == 1)
                                             @if($value->status == 0)
                                                 <a href="{{route('updateStatus.servedinks', [1, $value->id])}}" class='badge bg-primary'>
                                                     <span>Thanh toán</span>
@@ -79,7 +79,11 @@
                                                     <span class='badge bg-primary'>Đã phục vụ</span>
                                                 </a>
                                             @endif
-                                        @endif
+                                        @endif --}}
+                                        <a href="{{route('getDetail.billofsale', $value->id)}}" class='sidebar-link'>
+                                            <i data-feather="delete" width="20"></i> 
+                                            <span>Xem chi tiết</span>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
