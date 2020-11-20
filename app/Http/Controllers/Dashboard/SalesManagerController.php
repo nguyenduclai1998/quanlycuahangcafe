@@ -192,7 +192,6 @@ class SalesManagerController extends Controller
 		$billDetail = BillDetailModel::select('billdetail.menu_id','billdetail.amount', 'menu.name', 'menu.price')
 									 ->join('menu', 'billdetail.menu_id', '=', 'menu.id')
 									 ->where('billdetail.bill_id', $id)->get();
-		// dd($billDetail);
 		$viewData = [
 			'bill' => $bill,
 			'billDetail' => $billDetail
