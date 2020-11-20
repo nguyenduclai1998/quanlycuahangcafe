@@ -25,7 +25,7 @@
     <body>
         <div id="app">
             <div id="sidebar" class='active'>
-                <div class="sidebar-wrapper active">
+                <div class="sidebar-wrapper active no-print">
                     <div class="sidebar-header">
                         <img src="{{asset ('dashboard/assets/images/logo.svg')}}" alt="" srcset="">
                     </div>
@@ -52,7 +52,7 @@
                                     </li>
                                     
                                     <li>
-                                        <a href="component-badge.html">Phục vụ đồ uống</a>
+                                        <a href="{{route('get.servedinks')}}">Phục vụ đồ uống</a>
                                     </li>
                                 </ul>
                                 
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div id="main">
-                <nav class="navbar navbar-header navbar-expand navbar-light">
+                <nav class="navbar navbar-header navbar-expand navbar-light no-print">
                     <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>
                     <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,7 +141,7 @@
                         @yield('content')
                     </section>
                 </div>
-                <footer>
+                <footer  class="no-print">
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-left">
                             <p>2020 &copy; Trần Việt Tiến</p>
@@ -157,12 +157,8 @@
         <script src="{{asset ('dashboard/assets/js/pages/dashboard.js') }}"></script>
         <script src="{{asset ('dashboard/assets/js/main.js') }}"></script>
         <script src="{{asset ('dashboard/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
-        {{-- <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> --}}
         <script src="{{asset ('dashboard/assets/js/vendors.js') }}"></script>
-        <!-- DataTables -->
-        {{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> --}}
-        <!-- Include Choices JavaScript -->
-        {{-- <script src="{{asset ('dashboard/assets/vendors/choices.js/choices.min.js') }}"></script> --}}
+        <script src="{{asset ('dashboard/assets/js/printThis.js') }}"></script>
         @toastr_js
         @toastr_render
     </body>

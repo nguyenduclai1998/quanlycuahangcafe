@@ -21,7 +21,6 @@ class SalesManagerController extends Controller
     		               ->join('users', 'bill.user_id', '=', 'users.id')
     		               ->join('table', 'bill.table_id', '=', 'table.id')
     		               ->get();
-        // dd($bill);
     	$viewData = [
     		'bill' => $bill
     	];
@@ -41,54 +40,60 @@ class SalesManagerController extends Controller
 
     public function storeBillOfSale(Request $request) {
     	$data = $request->except('_token');
-    	$array = array_combine($data['productId'], $data['unit']);
-    	$messages = [
-    		'table_id.required' => "Bàn không được để trống",
-    		'productId.*.required' => "Món ăn không được để trống",
-    		'unit.*.required' => "Số lượng không được để trống",
-    		'unit.*.numeric' => "Số lượng phải là một số.",
-    		'unit.*.min' => "Số lượng nhỏ nhất là 1."
-    	];
-    	$validator = Validator::make($data, [
-    		'table_id' => 'required',
-    		'unit.*' => 'required|numeric|min:1',
-            'productId.*' => 'required'
-    	], $messages);
+    	if(array_key_exists('productId', $data)) {
+    		$array = array_combine($data['productId'], $data['unit']);
+	    	$messages = [
+	    		'table_id.required' => "Bàn không được để trống",
+	    		'productId.*.required' => "Món ăn không được để trống",
+	    		'unit.*.required' => "Số lượng không được để trống",
+	    		'unit.*.numeric' => "Số lượng phải là một số.",
+	    		'unit.*.min' => "Số lượng nhỏ nhất là 1."
+	    	];
+	    	$validator = Validator::make($data, [
+	    		'table_id' => 'required',
+	    		'unit.*' => 'required|numeric|min:1',
+	            'productId.*' => 'required'
+	    	], $messages);
 
-    	if($validator->fails()) {
-    		$errors = $validator->errors();
-    		$errors = $errors->toArray();
-    		foreach ($errors as $value) {
-    			foreach ($value as $element) {
-    				toastr()->error($element);
-    			}
-    		}
-    		return redirect()->back();
-    	} else {
-    		try {
-    			$bill = new BillModel();
-    			$number = BillModel::max('number') + 1;
-	    		$bill->bill_code = "HD-".str_pad($number, 5, "0", STR_PAD_LEFT);
-	    		$bill->user_id = Auth::id();
-	    		$bill->table_id = $request->table_id;
-	    		$bill->bill_date = Carbon::now()->toDateTimeString();
-	    		$bill->number = BillModel::max('number') + 1;
-	    		$bill->save();
-
-	    		foreach ($array as $key => $value) {
-	                $billDetail = new BillDetailModel();
-		    		$billDetail->bill_id = $bill->id;
-		    		$billDetail->menu_id = $key;
-		    		$billDetail->amount = $value;
-		    		$billDetail->save();
-	            }
-	    		
-	    		toastr()->success("Thêm mới thành công.");
+	    	if($validator->fails()) {
+	    		$errors = $validator->errors();
+	    		$errors = $errors->toArray();
+	    		foreach ($errors as $value) {
+	    			foreach ($value as $element) {
+	    				toastr()->error($element);
+	    			}
+	    		}
 	    		return redirect()->back();
-    		} catch (\Exception $e) {
-    			
-    		}
-		}
+	    	} else {
+	    		try {
+	    			$bill = new BillModel();
+	    			$number = BillModel::max('number') + 1;
+		    		$bill->bill_code = "HD-".str_pad($number, 5, "0", STR_PAD_LEFT);
+		    		$bill->user_id = Auth::id();
+		    		$bill->table_id = $request->table_id;
+		    		$bill->bill_date = Carbon::now()->toDateTimeString();
+		    		$bill->number = BillModel::max('number') + 1;
+		    		$bill->save();
+
+		    		foreach ($array as $key => $value) {
+		                $billDetail = new BillDetailModel();
+			    		$billDetail->bill_id = $bill->id;
+			    		$billDetail->menu_id = $key;
+			    		$billDetail->amount = $value;
+			    		$billDetail->save();
+		            }
+		    		
+		    		toastr()->success("Thêm mới thành công.");
+		    		return redirect()->back();
+	    		} catch (\Exception $e) {
+	    			toastr()->error("Đã xảy ra lỗi vui lòng thử lại.");
+	    			return redirect()->back();
+	    		}
+			}
+    	} else {
+    		toastr()->error("Vui lòng chọn món.");
+    		return redirect()->back();
+    	}
     }
 
     public function editBillOfSale($id) 
