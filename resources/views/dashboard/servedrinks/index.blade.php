@@ -29,7 +29,7 @@
                                 <th>Bàn</th>
                                 <th>Ngày lập hóa đơn</th>
                                 <th>Trạng thái</th>
-                                @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                @if(Auth::user()->role_id == 2)
                                 <th>Thao tác</th>
                                 @endif
                             </tr>
@@ -80,10 +80,12 @@
                                                 </a>
                                             @endif
                                         @endif --}}
+                                        @if(Auth::user()->role_id == 2)
                                         <a href="{{route('getDetail.billofsale', $value->id)}}" class='sidebar-link'>
                                             <i data-feather="delete" width="20"></i> 
                                             <span>Xem chi tiết</span>
                                         </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
