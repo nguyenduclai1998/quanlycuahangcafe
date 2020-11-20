@@ -203,7 +203,7 @@
                         <h5 style="font-weight: 900;">Tổng cộng:  </h5>
                     </div>
                     <div class="col-6 form-group">
-                        <input type="text" style="pointer-events:none; border: none; text-align: right;" id ="amouts" class="form-control" name="amouts">
+                        <input type="text" style="pointer-events:none; border: none; text-align: right;" id ="amouts1" class="form-control" name="amouts">
                     </div>
                 </div>
             </div>
@@ -218,6 +218,7 @@
         amouts = amouts + parseInt(value.amount)*parseInt(value.price)
     })
     $("#amouts").val(amouts.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}));
+    $("#amouts1").val(amouts.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}));
 </script>
 <script type="text/javascript">
     $('#printThis').on("click", function () {
