@@ -85,10 +85,12 @@
             <div class="card-content">
                 <div class="card-body" style="padding-left: 0px">
                     <!-- button trigger for  Vertically Centered modal -->
+                    @if(Auth::user()->role_id == 2)
                     <button type="button" class="btn btn-primary block" data-toggle="modal"
                         data-target="#exampleModalCenter">
                     Thêm mới 
                     </button>
+                    @endif
                     <!-- Vertically Centered modal Modal -->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -223,7 +225,9 @@
                             <th>Tên người giao hàng</th>
                             <th>SĐT người giao hàng</th>
                             <th>Thời gian lập phiếu</th>
+                            @if(Auth::user()->role_id == 2)
                             <th>Thao tác</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -236,6 +240,7 @@
                                 <td>{{$value->deliver}}</td>
                                 <td>{{$value->deliver_phone_number}}</td>
                                 <td>{{$value->issue_date}}</td>
+                                @if(Auth::user()->role_id == 2)
                                 <td class="active">
                                     <a href="{{route('get.goodDeliveryNoteDetail', $value->id)}}" class='sidebar-link'>
                                         <i data-feather="delete" width="20"></i> 
@@ -414,6 +419,7 @@
                                         <span>Xóa</span>
                                     </a>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

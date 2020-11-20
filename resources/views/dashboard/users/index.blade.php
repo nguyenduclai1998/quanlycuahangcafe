@@ -22,10 +22,12 @@
             <div class="card-content">
                 <div class="card-body" style="padding-left: 0px">
                     <!-- button trigger for  Vertically Centered modal -->
+                    @if(Auth::user()->role_id == 0)
                     <button type="button" class="btn btn-primary block" data-toggle="modal"
                         data-target="#exampleModalCenter">
                     Thêm mới 
                     </button>
+                    @endif
                     <!-- Vertically Centered modal Modal -->
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -110,7 +112,7 @@
                                                                                         <option value="">---Chọn vị trí làm việc---</option>   
                                                                                         <option value="0">Quản lý</option>
                                                                                         <option value="1">Thu ngân</option>
-                                                                                        <option value="2">Pha chế</option>
+                                                                                        <option value="2">Pha chế/ Phục vụ</option>
                                                                                     </select>
                                                                                     <label for="text" class="error"></label>
                                                                                 </fieldset>
@@ -165,7 +167,9 @@
                             <th>Vị trí làm việc</th>
                             <th>Giới tính</th>
                             <th>Trạng thái</th>
+                            @if(Auth::user()->role_id == 0)
                             <th>Thao tác</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -196,6 +200,7 @@
                                         <span class="badge bg-danger">Đã nghỉ việc</span>
                                     </td>
                                 @endif
+                                @if(Auth::user()->role_id == 0)
                                 <td class="active">
                                     <div class="card" style="box-shadow:none; background-color:unset; margin-bottom: 0;">
                                         <div class="card-content">
@@ -318,6 +323,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
