@@ -60,6 +60,9 @@ Route::group(['prefix' => '', 'namespace' => 'Dashboard'], function() {
 		Route::post('cap-nhat-don-ban-hang-{id}.html', 'SalesManagerController@updateBillOfSale')->name('update.billofsale');
 		Route::get('xoa-don-don-hang-{id}.html', 'SalesManagerController@deleteBillOfSale')->name('delete.billofsale');
 		Route::get('xem-chi-tiet-don-hang-{id}.html', 'SalesManagerController@getBillDetal')->name('getDetail.billofsale');
+
+		Route::get('phuc-vu-do-uong.html', 'ServeDinksController@getBill')->name('get.servedinks');
+		Route::get('cap-nhat-trang-thai-{status}-{id}.html', 'ServeDinksController@updateStatus')->name('updateStatus.servedinks');
 	});
 });
 

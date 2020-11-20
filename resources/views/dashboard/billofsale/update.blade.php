@@ -262,7 +262,14 @@
 
 	});
 </script>
-
+<script type="text/javascript">
+    var billDetail = <?php echo json_encode($billDetail, JSON_HEX_TAG); ?>;
+    var amouts = 0;
+    billDetail.forEach(function(value) {
+        amouts = amouts + parseInt(value.amount)*parseInt(value.price)
+    })
+    $("#amouts").val(amouts.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}));
+</script>
 <script>
     plusField();
     calculate();
