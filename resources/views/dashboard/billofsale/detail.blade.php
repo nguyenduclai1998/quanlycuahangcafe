@@ -61,7 +61,7 @@
             <div class="col-6">
                 <div class="row">
                     <div class="col-4">
-                        <label>Số bàn</label>
+                        <label>Bàn số</label>
                     </div>
                     <div class="col-8 form-group">
                         <label>Bàn {{$bill->number}}</label>
@@ -153,7 +153,7 @@
             <div class="col-6">
                 <div class="row">
                     <div class="col-4">
-                        <label>Số bàn</label>
+                        <label>Bàn số</label>
                     </div>
                     <div class="col-8 form-group">
                         <label>Bàn {{$bill->number}}</label>

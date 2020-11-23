@@ -83,12 +83,15 @@ class GoodDeliveryNoteController extends Controller
     		}
     		return redirect()->back();
     	} else {
+            $original_date = Carbon::now()->toDateTimeString();
+            $timestamp = strtotime($original_date);
+            $issue_date = date('H:i:s Y-m-d', $timestamp);
     		$goodDeliveryNote = new GoodsDeliveryNoteModel();
     		$goodDeliveryNote->goods_delivery_note_code = strtoupper(Str::slug($request->goods_delivery_note_code));
     		$goodDeliveryNote->supplier_id = $request->supplier_id;
     		$goodDeliveryNote->deliver = $request->deliver;
     		$goodDeliveryNote->user_id = Auth::id();
-    		$goodDeliveryNote->issue_date = Carbon::now()->toDateTimeString();
+    		$goodDeliveryNote->issue_date = $issue_date;
     		$goodDeliveryNote->deliver_phone_number = $request->deliver_phone_number;
     		$goodDeliveryNote->save();
 
