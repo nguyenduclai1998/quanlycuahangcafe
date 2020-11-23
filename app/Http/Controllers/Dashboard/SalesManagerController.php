@@ -78,7 +78,7 @@ class SalesManagerController extends Controller
 	    		try {
                     $original_date = Carbon::now()->toDateTimeString();
                     $timestamp = strtotime($original_date);
-                    $bill_date = date('H:i:s dd-mm-yyyy', $timestamp);
+                    $bill_date = date('H:i:s d-m-yy', $timestamp);
 	    			$bill = new BillModel();
 	    			$number = BillModel::max('number') + 1;
 		    		$bill->bill_code = "HD-".str_pad($number, 5, "0", STR_PAD_LEFT);
