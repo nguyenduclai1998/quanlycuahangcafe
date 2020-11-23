@@ -40,8 +40,19 @@ class SalesManagerController extends Controller
 
     public function storeBillOfSale(Request $request) {
     	$data = $request->except('_token');
+        
+        $productId = $data['productId'];
+        $unit = $data['unit'];
+        $price = $data['price'];
+        $arrayItem = [];
+        $size = count($productId);
+        for($i = 0; $i < $size; ++$i) {
+            $arrayItem[$i] = [$productId[$i], $unit[$i], $price[$i]];
+           
+        }
     	if(array_key_exists('productId', $data)) {
     		$array = array_combine($data['productId'], $data['unit']);
+            
 	    	$messages = [
 	    		'table_id.required' => "Bàn không được để trống",
 	    		'productId.*.required' => "Món ăn không được để trống",
@@ -76,11 +87,12 @@ class SalesManagerController extends Controller
 		    		$bill->number = BillModel::max('number') + 1;
 		    		$bill->save();
 
-		    		foreach ($array as $key => $value) {
+		    		foreach ($arrayItem as  $value) {
 		                $billDetail = new BillDetailModel();
 			    		$billDetail->bill_id = $bill->id;
-			    		$billDetail->menu_id = $key;
-			    		$billDetail->amount = $value;
+			    		$billDetail->menu_id = (int)$value[0];
+			    		$billDetail->amount = (int)$value[1];
+                        $billDetail->price = (int)$value[2];
 			    		$billDetail->save();
 		            }
 		    		
@@ -121,7 +133,16 @@ class SalesManagerController extends Controller
     public function updateBillOfSale(Request $request, $id) 
     {
     	$data = $request->except('_token');
-    	$array = array_combine($data['productId'], $data['unit']);
+        
+    	$productId = $data['productId'];
+        $unit = $data['unit'];
+        $price = $data['price'];
+        $arrayItem = [];
+        $size = count($productId);
+        for($i = 0; $i < $size; ++$i) {
+            $arrayItem[$i] = [$productId[$i], $unit[$i], $price[$i]];
+           
+        }
     	$messages = [
     		'table_id.required' => "Bàn không được để trống",
     		'productId.*.required' => "Món ăn không được để trống",
@@ -152,13 +173,14 @@ class SalesManagerController extends Controller
 	    		$bill->table_id = $request->table_id;
 	    		$bill->update();
 
-	    		foreach ($array as $key => $value) {
-	                $billDetail = new BillDetailModel();
-		    		$billDetail->bill_id = $bill->id;
-		    		$billDetail->menu_id = $key;
-		    		$billDetail->amount = $value;
-		    		$billDetail->save();
-	            }
+	    		foreach ($arrayItem as  $value) {
+                    $billDetail = new BillDetailModel();
+                    $billDetail->bill_id = $bill->id;
+                    $billDetail->menu_id = (int)$value[0];
+                    $billDetail->amount = (int)$value[1];
+                    $billDetail->price = (int)$value[2];
+                    $billDetail->save();
+                }
 	    		
 	    		toastr()->success("Cập nhật thành công.");
 	    		return redirect()->route('getDetail.billofsale', ['id' => $bill->id]);
@@ -190,7 +212,7 @@ class SalesManagerController extends Controller
 						  ->join('table', 'bill.table_id', '=', 'table.id')
                           ->where('bill.id', $id)
 						  ->first();
-		$billDetail = BillDetailModel::select('billdetail.menu_id','billdetail.amount', 'menu.name', 'menu.price')
+		$billDetail = BillDetailModel::select('billdetail.menu_id','billdetail.amount', 'billdetail.price', 'menu.name', 'menu.price')
 									 ->join('menu', 'billdetail.menu_id', '=', 'menu.id')
 									 ->where('billdetail.bill_id', $id)->get();
 		$viewData = [
