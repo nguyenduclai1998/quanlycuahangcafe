@@ -41,18 +41,17 @@ class SalesManagerController extends Controller
     public function storeBillOfSale(Request $request) {
     	$data = $request->except('_token');
         
-        $productId = $data['productId'];
-        $unit = $data['unit'];
-        $price = $data['price'];
-        $arrayItem = [];
-        $size = count($productId);
-        for($i = 0; $i < $size; ++$i) {
-            $arrayItem[$i] = [$productId[$i], $unit[$i], $price[$i]];
-           
-        }
     	if(array_key_exists('productId', $data)) {
-    		$array = array_combine($data['productId'], $data['unit']);
-            
+            $productId = $data['productId'];
+            $unit = $data['unit'];
+            $price = $data['price'];
+            $arrayItem = [];
+            $size = count($productId);
+            for($i = 0; $i < $size; ++$i) {
+                $arrayItem[$i] = [$productId[$i], $unit[$i], $price[$i]];
+               
+            }
+
 	    	$messages = [
 	    		'table_id.required' => "Bàn không được để trống",
 	    		'productId.*.required' => "Món ăn không được để trống",
