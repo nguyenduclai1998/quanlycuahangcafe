@@ -18,6 +18,7 @@ class CreateBilldetailTable extends Migration
             $table->bigInteger('bill_id')->unsigned();
             $table->bigInteger('menu_id')->unsigned()->nullable();
             $table->bigInteger('amount')->nullable();
+            $table->bigInteger('price');
             $table->timestamps();
         });
     }

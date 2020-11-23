@@ -94,6 +94,7 @@
                             <th>STT</th>
                             <th>Tên món</th>
                             <th>Số lượng</th>
+                            <th>Đơn giá</th>
                             <th>Thành tiền</th>
                         </tr>
                     </thead>
@@ -103,6 +104,7 @@
                                 <td>{{$k + 1}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->amount}}</td>
+                                <td>{{$value->price}}</td>
                                 <td>{{number_format($value->price * $value->amount, 0, '', ',')}}</td>
                             </tr>
                         @endforeach
@@ -184,6 +186,7 @@
                             <th>STT</th>
                             <th>Tên món</th>
                             <th>Số lượng</th>
+                            <th>Đơn giá</th>
                             <th>Thành tiền</th>
                         </tr>
                     </thead>
@@ -193,6 +196,7 @@
                                 <td>{{$k + 1}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->amount}}</td>
+                                <td>{{$value->price}}</td>
                                 <td>{{number_format($value->price * $value->amount, 0, '', ',')}}</td>
                             </tr>
                         @endforeach

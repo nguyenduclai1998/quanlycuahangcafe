@@ -1,12 +1,6 @@
 @extends('layouts.app_master_dashboard')
 @section('content')
 <style type="text/css">
-    [data-action="addField"]::after {
-        content: '\f067';
-        display: inline-block;
-        font-family: 'FontAwesome';
-        font-weight: bold;
-    }
     [data-action="addField"]:hover {
         cursor: pointer;
         background-color: #2196F3
@@ -59,20 +53,22 @@
                                 	@if(isset($menu))
 	                                	<div class="row" >
 		                                	@foreach($menu as $k => $value)
-		                                    	<div class="col-3" style="background: #ebebea!important; margin: 10px; text-align: center;">
+		                                    	<div class="col-3" data-action="addField" data-product-id="{{ $value->id }}" style="background: #ebebea!important; margin: 10px; text-align: center;">
 		                                    		<img style="width: 100%; background-color:#ebebea" 
 		                                    			data-action="addField"
 		                                    			data-product-id="{{ $value->id }}"  
 		                                    			src="{{asset('dashboard/assets/images/food.png')}}" 
 		                                    			alt="">
-		                                    		<strong>{{$value->name}}</strong>
+		                                    		<strong >{{$value->name}}</strong>
 		                                    		<div style="display: none;">
 		                                    			<div data-product-id="{{$value->id}}" data-content="templateItem" >
 			                                    			<div class="row" data-product-id="{{$value->id}}">
 			                                    				<input type="hidden" id="productId" name="productId[]" value="{{$value->id}}">
 		                                                        <div class="col-3">
 		                                                            <div class="form-group">
-		                                                                <label for="first-name-vertical" class="form-control"  style="border: none; text-transform: none;">{{$value->name}}</label>
+		                                                                <label for="first-name-vertical" 
+                                                                        class="form-control"  
+                                                                        style="border: none; text-transform: none;">{{$value->name}}</label>
 		                                                                <input type="hidden" name="name[]" value="{{$value->id}}">  
 		                                                            </div>
 		                                                        </div>

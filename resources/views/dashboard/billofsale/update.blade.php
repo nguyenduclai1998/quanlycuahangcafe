@@ -1,12 +1,6 @@
 @extends('layouts.app_master_dashboard')
 @section('content')
 <style type="text/css">
-    [data-action="addField"]::after {
-        content: '\f067';
-        display: inline-block;
-        font-family: 'FontAwesome';
-        font-weight: bold;
-    }
     [data-action="addField"]:hover {
         cursor: pointer;
         background-color: #2196F3
@@ -59,7 +53,7 @@
                                 	@if(isset($menu))
 	                                	<div class="row" >
 		                                	@foreach($menu as $k => $value)
-		                                    	<div class="col-3" style="background: #ebebea!important; margin: 10px; text-align: center;">
+		                                    	<div class="col-3" data-action="addField" data-product-id="{{ $value->id }}" style="background: #ebebea!important; margin: 10px; text-align: center;">
 		                                    		<img style="width: 100%; background-color:#ebebea" 
 		                                    			data-action="addField"
 		                                    			data-product-id="{{ $value->id }}"  
