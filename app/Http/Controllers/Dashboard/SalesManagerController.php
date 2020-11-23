@@ -76,13 +76,16 @@ class SalesManagerController extends Controller
 	    		return redirect()->back();
 	    	} else {
 	    		try {
+                    $original_date = Carbon::now()->toDateTimeString();
+                    $timestamp = strtotime($original_date);
+                    $bill_date = date('H:i:s Y-m-d', $timestamp);
 	    			$bill = new BillModel();
 	    			$number = BillModel::max('number') + 1;
 		    		$bill->bill_code = "HD-".str_pad($number, 5, "0", STR_PAD_LEFT);
 		    		$bill->user_id = Auth::id();
 		    		$bill->table_id = $request->table_id;
                     $bill->status = 1;
-		    		$bill->bill_date = Carbon::now()->toDateTimeString();
+		    		$bill->bill_date = $bill_date;
 		    		$bill->number = BillModel::max('number') + 1;
 		    		$bill->save();
 
