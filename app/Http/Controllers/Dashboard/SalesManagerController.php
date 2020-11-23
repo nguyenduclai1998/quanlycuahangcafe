@@ -211,10 +211,11 @@ class SalesManagerController extends Controller
 						  ->join('table', 'bill.table_id', '=', 'table.id')
                           ->where('bill.id', $id)
 						  ->first();
-		$billDetail = BillDetailModel::select('billdetail.menu_id','billdetail.amount', 'billdetail.price', 'menu.name', 'menu.price')
+		$billDetail = BillDetailModel::select('billdetail.menu_id','billdetail.amount', 'billdetail.price', 'menu.name', 'billdetail.price')
 									 ->join('menu', 'billdetail.menu_id', '=', 'menu.id')
 									 ->where('billdetail.bill_id', $id)->get();
-		$viewData = [
+	    // dd($billDetail);
+        $viewData = [
 			'bill' => $bill,
 			'billDetail' => $billDetail
 		];
