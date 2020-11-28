@@ -28,7 +28,7 @@ class SalesManagerController extends Controller
     }
 
     public function createBillOfSale() {
-    	$menu = MenuModel::where('status', 0)->get();
+    	$menu = MenuModel::where('status', 0)->where('is_active', 1)->get();
     	$table = TableModel::where('status', 0)->get();
 
     	$viewData = [

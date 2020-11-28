@@ -32,8 +32,8 @@ class GoodDeliveryNoteController extends Controller
             $goodDeliveryNoteDetails[$value['id']][] = $goodDeliveryNoteDetail;
         }
 
-    	$supplier = SupplierModel::get();
-    	$matterial = MatterialsModel::get();
+    	$supplier = SupplierModel::where('is_active', 1)->get();
+    	$matterial = MatterialsModel::where('is_active', 1)->get();
         $title = "Quản lý phiếu nhập kho";
 
     	$viewData = [
