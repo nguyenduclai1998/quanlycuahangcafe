@@ -12,8 +12,14 @@ class MenuManagerController extends Controller
 {
     public function getMenu() {
     	$menu = MenuModel::get();
+        $menuArr = [];
+        foreach ($menu as $value) {
+            if($value['is_active'] == 1) {
+                array_push($menuArr, $value);
+            }
+        }
     	$viewData = [
-    		'menu' => $menu
+    		'menu' => $menuArr
     	];
     	return view('dashboard.menu.index', $viewData);
     }
@@ -108,14 +114,12 @@ class MenuManagerController extends Controller
     }
 
     public function deleteMenu($idmMenu) {
-    	$menu = MenuModel::find($idmMenu);
-    	if($menu) {
-    		$menu->delete();
-    		toastr()->success('Xóa thành công.');
-            return redirect()->back();
-    	} else {
-    		toastr()->error("Đã xảy ra lỗi vui lòng thử lại.");
-    		return redirect()->back();
-    	}
+        $menu = new MenuModel();
+        $menu = MenuModel::find($idmMenu);
+        $menu->is_active = 0;
+        $menu->update();
+
+        toastr()->success('Xóa thành công.');
+        return redirect()->back();
     }
 }

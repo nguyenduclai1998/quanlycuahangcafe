@@ -12,9 +12,14 @@ class ManageSuppierController extends Controller
 {
     public function getSupplier() {
     	$supplier = SupplierModel::get();
-
+        $supplierArr = [];
+        foreach ($supplier as $value) {
+            if($value['is_active'] == 1) {
+                array_push($supplierArr, $value);
+            }
+        }
     	$viewData = [
-    		'supplier' => $supplier
+    		'supplier' => $supplierArr
     	];
 
     	return view('dashboard.supplier.index', $viewData);
@@ -84,15 +89,12 @@ class ManageSuppierController extends Controller
     }
 
     public function deleteSupplier($idSupplier) {
-    	$supplier = SupplierModel::find($idSupplier);
-    	if($supplier) {
-    		$supplier->delete();
-    		toastr()->success("Xóa thành công");
-    		return redirect()->back();
-    	} else {
-    		toastr()->error("Đã có lỗi xảy ra vui lòng thử lại.");
-    		return redirect()->back();
-    	}
+        $supplier = new SupplierModel();
+        $supplier = SupplierModel::find($idSupplier);
+        $supplier->is_active = 0;
+        $supplier->update();
+        toastr()->success("Xóa thành công");
+        return redirect()->back();    
     }
 }
 

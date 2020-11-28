@@ -12,9 +12,14 @@ class ManageMatterialController extends Controller
 {
     public function getMatterial() {
     	$matterial = MatterialsModel::get();
-
+        $matterialArr = [];
+        foreach ($matterial as $value) {
+            if($value['is_active'] == 1) {
+                array_push($matterialArr, $value);
+            }
+        }
     	$viewData = [
-    		'matterial' => $matterial
+    		'matterial' => $matterialArr
     	];
 
     	return view('dashboard.matterial.index', $viewData);
@@ -91,14 +96,11 @@ class ManageMatterialController extends Controller
     }
 
     public function deleteMatterial($idMatterial) {
-    	$matterial = MatterialsModel::find($idMatterial);
-    	if($matterial) {
-    		$matterial->delete();
-    		toastr()->success("Xóa thành công.");
-    		return redirect()->back();
-    	}else {
-    		toastr()->error("Đã xảy ra lỗi vui lòng thử lại.");
-    		return redirect()->back();
-    	}
+        $matterial = new MatterialsModel();
+        $matterial = MatterialsModel::find($idMatterial);
+        $matterial->is_active = 0;
+        $matterial->update();
+        toastr()->success("Xóa thành công.");
+        return redirect()->back();
     }
 }
