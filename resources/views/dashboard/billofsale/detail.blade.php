@@ -237,14 +237,14 @@
 
 @if(Auth::user()->role_id == 1)
     <script type="text/javascript">
-        function initPrintThis () {
-            return $('.printThis').printThis({
-                debug: true,
-                // afterPrint:  function () {
-                //     window.location.href = "{{ route('create.billofsale')}}";
-                // },
-            });
-        }
+        // function initPrintThis () {
+        //     return $('.printThis').printThis({
+        //         debug: true,
+        //         // afterPrint:  function () {
+        //         //     window.location.href = "{{ route('create.billofsale')}}";
+        //         // },
+        //     });
+        // }
 
         initPrintThis()
     </script>
@@ -252,7 +252,10 @@
 
 <script type="text/javascript">
     $('#printThis').on("click", function () {
-        initPrintThis()
+        $('.printThis').printThis({
+
+        });
+        // initPrintThis()
     });
 </script>
 @endif
