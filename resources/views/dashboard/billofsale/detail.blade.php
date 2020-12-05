@@ -2,6 +2,7 @@
 @section('content')
 @if(isset($bill))
 @if(isset($billDetail))
+
 <div class="main-content container-fluid">
     <div class="page-title no-print">
         <div class="row">
@@ -215,6 +216,15 @@
         </div>
     </div>
 </div>
+<script src="{{asset ('dashboard/assets/js/printThis.js') }}"></script>
+<script type="text/javascript">
+
+    function afterPrint()
+    {
+        console.log('aaaa')
+        window.location.href = "{{ route('create.billofsale')}}";
+    }
+</script>
 <script type="text/javascript">
     var billDetail = <?php echo json_encode($billDetail, JSON_HEX_TAG); ?>;
     var amouts = 0;
@@ -224,11 +234,25 @@
     $("#amouts").val(amouts.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}));
     $("#amouts1").val(amouts.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}));
 </script>
+
+@if(Auth::user()->role_id == 1)
+    <script type="text/javascript">
+        function initPrintThis () {
+            return $('.printThis').printThis({
+                debug: true,
+                // afterPrint:  function () {
+                //     window.location.href = "{{ route('create.billofsale')}}";
+                // },
+            });
+        }
+
+        initPrintThis()
+    </script>
+@endif
+
 <script type="text/javascript">
     $('#printThis').on("click", function () {
-        $('.printThis').printThis({
-            base: "https://jasonday.github.io/printThis/"
-        });
+        initPrintThis()
     });
 </script>
 @endif

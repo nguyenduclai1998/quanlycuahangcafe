@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{--         <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
         <title>Quản lý quán cafe</title>
         <link rel="stylesheet" href="{{asset('dashboard/assets/css/bootstrap.css')}}">
         <link rel="stylesheet" href="{{asset('dashboard/assets/vendors/simple-datatables/style.css') }}">
@@ -13,8 +13,8 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Include Choices CSS -->
         <link rel="shortcut icon" href="{{asset('dashboard/assets/images/favicon.svg')}}" type="image/x-icon">
-        <!-- Validate Jquery -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+        @stack('scripts')
+       
         @toastr_css
     </head>
     <style type="text/css">
@@ -156,8 +156,12 @@
         <script src="{{asset ('dashboard/assets/js/main.js') }}"></script>
         <script src="{{asset ('dashboard/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
         <script src="{{asset ('dashboard/assets/js/vendors.js') }}"></script>
-        <script src="{{asset ('dashboard/assets/js/printThis.js') }}"></script>
+        
+        <!-- Validate Jquery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
         @toastr_js
         @toastr_render
+
+        
     </body>
 </html>

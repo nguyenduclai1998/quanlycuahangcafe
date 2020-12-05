@@ -19,9 +19,8 @@ Route::group(['namespace' => 'Dashboard\Auth'], function() {
 
 Route::group(['prefix' => '', 'namespace' => 'Dashboard'], function() {
 	Route::middleware(['auth'])->group(function() {
-		Route::get('', function() {
-			return view('layouts.app_master_dashboard');
-		})->name('home');
+		Route::get('', 'HomeController@index')->name('home');
+		Route::post('statistical', 'HomeController@statistical')->name('statistical');
 
 		Route::get('quan-ly-thuc-don.html', 'MenuManagerController@getMenu')->name('get.menu');
 		Route::post('them-moi-thuc-don', 'MenuManagerController@createMenu')->name('post.create.menu');
