@@ -160,7 +160,23 @@
 			                                        <div class="col-9">
 			                                            <input type="text" style="pointer-events:none; border: none" id ="amouts" class="form-control" name="amouts" value="0">
 			                                        </div>
-			                                    </div>           
+			                                    </div>
+                                                <div class="form-group row align-items-center">
+                                                    <div class="col-3">
+                                                        <label style="font-weight:900;" class="col-form-label">Tiền khách đưa: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="number"class="form-control" id="tien_khach_dua" onchange="calculator(this.value)" name="tien_khach_dua" value="0">
+                                                    </div>
+                                                </div>  
+                                                <div class="form-group row align-items-center">
+                                                    <div class="col-3">
+                                                        <label style="font-weight:900;" class="col-form-label">Tiền thừa: </label>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" style="pointer-events:none; border: none" id ="tien_thua" class="form-control" name="tien_thua" value="0">
+                                                    </div>
+                                                </div>            
                                             </div>
                                             <div class="clearfix" style="padding-top: 15px;">
                                                 <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
@@ -226,6 +242,14 @@
 		});
 
 	});
+
+    function calculator(val) {
+        var tien_khach_dua = document.getElementById("tien_khach_dua").value;
+        var amouts = document.getElementById("amouts").value;
+        var tien_thua = tien_khach_dua - amouts
+        document.getElementById("tien_thua").value = tien_thua;
+        console.log(tien_thua)
+    }
 </script>
 
 <script>
